@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Sueño de Nuestra Boda | Matías & Danna</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --pink: #ff69b4;
+            --pink-light: #ff8dc7;
+            --pink-dark: #d44a9a;
+            --black: #121212;
+            --dark-gray: #1e1e1e;
+            --text: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--black);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,105,180,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,105,180,0.03) 0%, transparent 50%),
+                var(--black);
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.6; transform: scale(1); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            padding: 100px 0 80px;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .header-content {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 2s ease forwards 0.5s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            color: var(--pink);
+            font-size: 4rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--pink), transparent);
+            animation: expandLine 2s ease forwards 2s;
+        }
+        
+        @keyframes expandLine {
+            to { width: 100%; }
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards 1.5s;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--pink);
+            font-size: 2rem;
+            animation: bounce 2s infinite 3s;
+            cursor: pointer;
+            opacity: 0;
+        }
+        
+        @keyframes bounce {
+            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+            100% { transform: translateX(-50%) translateY(0); }
+        }
+        
+        .dream-intro {
+            max-width: 900px;
+            margin: 0 auto 100px;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(30,30,30,0.95), rgba(255,105,180,0.05));
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,105,180,0.2);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        
+        .dream-intro.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .dream-intro::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,105,180,0.08) 0%, transparent 70%);
+            animation: gentleRotate 30s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes gentleRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .dream-intro p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        .section {
+            margin-bottom: 120px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+            border-radius: 50%;
+            margin-right: 20px;
+            box-shadow: 0 10px 20px rgba(255,105,180,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .section-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 30px rgba(255,105,180,0.4);
+        }
+        
+        .section-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+        
+        h2 {
+            color: var(--pink);
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+        
+        .content-block {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            background: linear-gradient(135deg, rgba(30,30,30,0.95), rgba(30,30,30,0.9));
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,105,180,0.2);
+            transition: all 0.5s ease;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .content-block.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .content-block:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255,105,180,0.2);
+            border-color: rgba(255,105,180,0.4);
+        }
+        
+        .content-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                rgba(255,105,180,0) 0%,
+                rgba(255,105,180,0.1) 50%,
+                rgba(255,105,180,0) 100%
+            );
+            transition: left 0.8s ease;
+            z-index: 0;
+        }
+        
+        .content-block:hover::before {
+            left: 100%;
+        }
+        
+        .content-block::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+            border-bottom-left-radius: 20px;
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+            opacity: 0.8;
+            z-index: 1;
+        }
+        
+        .content-block h3 {
+            color: var(--pink-light);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content-block p {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .image-container {
+            width: 100%;
+            height: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .content-block:hover .image-container img {
+            transform: scale(1.05);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom, 
+                rgba(18,18,18,0) 60%, 
+                rgba(18,18,18,0.9) 100%
+            );
+            z-index: 1;
+        }
+        
+        .image-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: var(--text);
+            font-size: 1rem;
+            font-style: italic;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .highlight {
+            color: var(--pink);
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(255,105,180,0.5);
+        }
+        
+        .quote {
+            font-style: italic;
+            padding: 25px;
+            border-left: 4px solid var(--pink);
+            margin: 30px 0;
+            background: rgba(255,105,180,0.08);
+            border-radius: 0 10px 10px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .quote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-size: 4rem;
+            color: var(--pink);
+            opacity: 0.3;
+        }
+        
+        .special-moment {
+            position: relative;
+            padding: 60px 40px;
+            margin: 100px 0;
+            background: linear-gradient(
+                135deg, 
+                rgba(30,30,30,0.95) 0%, 
+                rgba(255,105,180,0.1) 50%, 
+                rgba(30,30,30,0.95) 100%
+            );
+            border-radius: 25px;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255,105,180,0.3);
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 1s ease;
+        }
+        
+        .special-moment.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .special-moment::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ff69b4' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            z-index: 0;
+            animation: gentleFloat 20s ease-in-out infinite;
+        }
+        
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .special-moment-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .special-moment h3 {
+            color: var(--pink);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(255,105,180,0.5);
+        }
+        
+        .special-moment p {
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 25px;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: linear-gradient(135deg, var(--pink), var(--pink-light));
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: gentleFloat 15s ease-in-out infinite;
+        }
+        
+        .heart-animation {
+            position: fixed;
+            z-index: -1;
+            opacity: 0;
+            animation: floatHeart 10s linear forwards;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                opacity: 0.3;
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg) scale(0.8);
+            }
+        }
+        
+        .sparkle {
+            position: absolute;
+            background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: sparkle 2s linear infinite;
+            z-index: 1;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1) rotate(180deg); opacity: 0.8; }
+            100% { transform: scale(0) rotate(360deg); opacity: 0; }
+        }
+        
+        .final-section {
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                to bottom,
+                var(--black) 0%,
+                rgba(255,105,180,0.05) 50%,
+                var(--black) 100%
+            );
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        
+        .final-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .final-title {
+            color: var(--pink);
+            font-size: 3rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 30px rgba(255,105,180,0.5);
+        }
+        
+        .final-title::before,
+        .final-title::after {
+            content: '♥';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--pink);
+            opacity: 0;
+            transition: all 0.8s ease;
+            font-size: 1.5rem;
+        }
+        
+        .final-title::before {
+            left: -60px;
+            animation: heartBeat 2s infinite;
+        }
+        
+        .final-title::after {
+            right: -60px;
+            animation: heartBeat 2s infinite 0.5s;
+        }
+        
+        @keyframes heartBeat {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+        }
+        
+        .final-section:hover .final-title::before,
+        .final-section:hover .final-title::after {
+            opacity: 1;
+        }
+        
+        .final-text {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-size: 1.2rem;
+            line-height: 2;
+        }
+        
+        .back-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255,105,180,0.3);
+        }
+        
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.4) 50%,
+                rgba(255,255,255,0) 100%
+            );
+            transition: left 0.8s ease;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255,105,180,0.5);
+        }
+        
+        .back-button:hover::before {
+            left: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .content-wrapper {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .content-block {
+                flex: 0 0 calc(50% - 25px);
+            }
+        }
+        
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .content-block h3 {
+                font-size: 1.5rem;
+            }
+            
+            .final-title {
+                font-size: 2.2rem;
+            }
+            
+            .special-moment {
+                padding: 40px 20px;
+            }
+            
+            .special-moment h3 {
+                font-size: 2rem;
+            }
+            
+            .section-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .section-icon svg {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars-bg"></div>
+    
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>El Sueño de Nuestra Boda</h1>
+                <p class="subtitle">Una visión de nuestro día perfecto que llegó a través de un sueño</p>
+            </div>
+            <div class="scroll-indicator">↓</div>
+        </header>
+        
+        <div class="dream-intro">
+            <p>Aquella noche, mientras dormía, mi mente me transportó a un lugar mágico donde pude ver con claridad cada detalle de nuestra boda. Un sueño tan vívido y hermoso que al despertar sentí la necesidad de compartirlo contigo, para que juntos podamos hacer realidad esta visión de nuestro día especial.</p>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+                <h2>El Escenario Perfecto</h2>
+            </div>
+            
+            <div class="content-wrapper">
+                <div class="content-block">
+                    <h3>Un Jardín Encantado</h3>
+                    <p>En mi sueño, nuestra ceremonia tenía lugar en un jardín mágico rodeado de árboles centenarios. El sol se filtraba entre las hojas creando un juego de luces y sombras sobre el suelo cubierto de pétalos blancos y rosados.</p>
+                    <p>Un arco de flores en tonos <span class="highlight">rosa y blanco</span> marcaba el altar, decorado con delicadas telas que se mecían suavemente con la brisa. El aroma de las flores llenaba el aire, creando una atmósfera de ensueño.</p>
+                    <div class="image-container">
+                        <img src="/placeholder.svg?height=350&width=600" alt="Jardín de la ceremonia">
+                        <div class="image-overlay"></div>
+                        <p class="image-caption">El jardín donde nos prometimos amor eterno</p>
+                    </div>
+                </div>
+                
+                <div class="content-block">
+                    <h3>Atardecer Dorado</h3>
+                    <p>La hora elegida era el atardecer, cuando el cielo se tiñe de tonos dorados y rosados. La luz natural creaba un ambiente cálido y romántico, perfecto para el momento en que nuestras miradas se encontraran al final del pasillo.</p>
+                    <p>Las sillas blancas decoradas con pequeños ramos de flores silvestres y cintas de seda formaban un camino hacia nuestro futuro juntos. Cada detalle estaba pensado para crear un momento <span class="highlight">mágico e inolvidable</span>.</p>
+                    <div class="image-container">
+                        <img src="/placeholder.svg?height=350&width=600" alt="Atardecer en la boda">
+                        <div class="image-overlay"></div>
+                        <p class="image-caption">La luz dorada del atardecer bañando nuestra ceremonia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="special-moment">
+            <div class="floating-elements"></div>
+            <div class="special-moment-content">
+                <h3>El Momento de Vernos</h3>
+                <p>En mi sueño, el instante en que te vi caminando hacia mí fue indescriptible. Llevabas un vestido que parecía hecho de luz y estrellas, tu sonrisa iluminaba todo el lugar y tus ojos brillaban con lágrimas de felicidad.</p>
+                <p>El tiempo pareció detenerse. Solo existíamos tú y yo en ese momento perfecto, mientras nuestros seres queridos nos observaban con emoción. La música suave acompañaba tus pasos, y mi corazón latía con fuerza anticipando el momento de tomarte de la mano.</p>
+                <p class="quote">"Y cuando nuestras miradas se encontraron, supe que este era el comienzo de nuestra eternidad juntos."</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/>
+                        <path d="M12 8v5l4 3-1.33 1.77L10 14V8z"/>
+                    </svg>
+                </div>
+                <h2>Detalles Que Nos Representan</h2>
+            </div>
+            
+            <div class="content-wrapper">
+                <div class="content-block">
+                    <h3>Votos Personales</h3>
+                    <p>En mi sueño, intercambiamos votos que venían directamente del corazón. Palabras sinceras que reflejaban nuestra historia, nuestras promesas y nuestros sueños compartidos.</p>
+                    <p>Recuerdo que en mi sueño te prometía <span class="highlight">amarte cada día más</span>, apoyarte en cada paso del camino y construir juntos una vida llena de momentos felices. Y tú, con lágrimas en los ojos, me prometías ser mi compañera, mi confidente y mi amor eterno.</p>
+                    <div class="image-container">
+                        <img src="/placeholder.svg?height=350&width=600" alt="Intercambio de votos">
+                        <div class="image-overlay"></div>
+                        <p class="image-caption">El momento de intercambiar nuestras promesas</p>
+                    </div>
+                </div>
+                
+                <div class="content-block">
+                    <h3>Música Que Nos Une</h3>
+                    <p>La música que sonaba en mi sueño era especial, canciones que han marcado momentos importantes en nuestra relación. Desde la melodía que sonaba cuando nos conocimos hasta aquellas que hemos bailado juntos en momentos íntimos.</p>
+                    <p>Nuestra <span class="highlight">canción especial</span> sonaba mientras bailábamos nuestro primer baile como esposos, moviéndonos al ritmo de la música como si flotáramos sobre una nube, perdidos en los ojos del otro.</p>
+                    <div class="image-container">
+                        <img src="/placeholder.svg?height=350&width=600" alt="Nuestro primer baile">
+                        <div class="image-overlay"></div>
+                        <p class="image-caption">Nuestro primer baile como esposos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9zm0-18c-4.97 0-9 4.03-9 9 4.97 0 9-4.03 9-9zm0 0c0 4.97 4.03 9 9 9-4.97 0-9-4.03-9-9zm0 0c0-4.97-4.03-9-9-9 4.97 0 9 4.03 9 9z"/>
+                    </svg>
+                </div>
+                <h2>La Celebración</h2>
+            </div>
+            
+            <div class="content-wrapper">
+                <div class="content-block">
+                    <h3>Un Banquete de Ensueño</h3>
+                    <p>La recepción tenía lugar bajo un cielo estrellado, con mesas decoradas con centros de flores frescas y velas que creaban un ambiente íntimo y acogedor. Las luces colgantes formaban un techo de estrellas artificiales que complementaban las reales.</p>
+                    <p>La comida era una selección de nuestros <span class="highlight">platos favoritos</span>, servidos con elegancia y acompañados de los mejores vinos. Cada bocado era una explosión de sabores que deleitaba a nuestros invitados.</p>
+                    <div class="image-container">
+                        <img src="/placeholder.svg?height=350&width=600" alt="Mesas de la recepción">
+                        <div class="image-overlay"></div>
+                        <p class="image-caption">Las mesas decoradas bajo las estrellas</p>
+                    </div>
+                </div>
+                
+                <div class="content-block">
+                    <h3>Momentos de Alegría</h3>
+                    <p>La pista de baile nunca estuvo vacía. Amigos y familiares compartían risas y bailes, celebrando nuestro amor con la misma alegría que nosotros sentíamos. Las fotografías capturaban momentos espontáneos de felicidad pura.</p>
+                    <p>Recuerdo especialmente el momento en que todos formamos un círculo a nuestro alrededor, aplaudiendo y cantando mientras nosotros <span class="highlight">bailábamos en el centro</span>, sintiéndonos los protagonistas de un cuento de hadas hecho realidad.</p>
+                    <div class="image-container">
+                        <img src="/placeholder.svg?height=350&width=600" alt="Baile con invitados">
+                        <div class="image-overlay"></div>
+                        <p class="image-caption">La alegría compartida con nuestros seres queridos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                    </svg>
+                </div>
+                <h2>Pequeños Detalles Mágicos</h2>
+            </div>
+            
+            <div class="content-wrapper">
+                <div class="content-block">
+                    <h3>Regalos Personalizados</h3>
+                    <p>Cada invitado recibía un pequeño regalo personalizado como agradecimiento por compartir nuestro día especial. Recuerdos únicos que llevaban grabados nuestros nombres y la fecha de nuestra boda.</p>
+                    <p>Estos detalles estaban envueltos en papel delicado y atados con cintas de <span class="highlight">color rosa</span>, manteniendo la estética de toda la celebración y creando una experiencia cohesiva para nuestros invitados.</p>
+                    <div class="image-container">
+                        <img src="/placeholder.svg?height=350&width=600" alt="Regalos para invitados">
+                        <div class="image-overlay"></div>
+                        <p class="image-caption">Los detalles que preparamos con amor</p>
+                    </div>
+                </div>
+                
+                <div class="content-block">
+                    <h3>Momentos de Luz</h3>
+                    <p>Al caer la noche, lanzamos al cielo farolillos luminosos, cada uno llevando un deseo para nuestro futuro juntos. El cielo se llenó de pequeñas luces que ascendían lentamente, creando un espectáculo mágico.</p>
+                    <p>También hubo un momento para las <span class="highlight">bengalas</span>, cuando todos los invitados formaron un pasillo de luz por el que caminamos juntos, simbolizando el camino iluminado que recorreremos en nuestra vida matrimonial.</p>
+                    <div class="image-container">
+                        <img src="/placeholder.svg?height=350&width=600" alt="Farolillos en el cielo">
+                        <div class="image-overlay"></div>
+                        <p class="image-caption">Nuestros deseos elevándose hacia las estrellas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="final-section">
+            <h2 class="final-title">Un Sueño Por Cumplir</h2>
+            <p class="final-text">Al despertar de este sueño tan vívido, sentí que había experimentado un adelanto de lo que será el día más feliz de nuestras vidas. Cada detalle, cada emoción, cada momento compartido en ese sueño es un reflejo de lo que deseo para nuestra boda real.</p>
+            <p class="final-text">Quería compartir esta visión contigo, para que juntos podamos hacer realidad este sueño, adaptándolo a nuestros deseos y posibilidades, pero manteniendo la esencia de lo que vi: un día lleno de amor, belleza y momentos inolvidables que marcarán el comienzo de nuestra vida como esposos.</p>
+            <a href="#" class="back-button">Volver a nuestra página</a>
+        </div>
+    </div>
+
+    <script>
+        // Create stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars-bg');
+            const starCount = 80;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Random position
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                
+                // Random size
+                const size = Math.random() * 2 + 1;
+                
+                // Random duration
+                const duration = Math.random() * 3 + 2;
+                
+                // Random delay
+                const delay = Math.random() * 5;
+                
+                star.style.left = `${left}%`;
+                star.style.top = `${top}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.setProperty('--duration', `${duration}s`);
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Create falling hearts
+        function createFallingHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-animation');
+                
+                // Random position
+                const left = Math.random() * 100;
+                
+                // Random size
+                const size = Math.random() * 15 + 8;
+                
+                heart.style.left = `${left}%`;
+                heart.style.bottom = '0';
+                
+                heart.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="${size}" height="${size}" fill="#ff69b4">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                `;
+                
+                document.body.appendChild(heart);
+                
+                // Remove heart after animation completes
+                setTimeout(() => {
+                    heart.remove();
+                }, 10000);
+            }, 2000);
+        }
+        
+        // Create sparkles
+        function createSparkles() {
+            const specialMoment = document.querySelector('.special-moment');
+            
+            setInterval(() => {
+                if (!specialMoment) return;
+                
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                
+                // Random position
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                
+                sparkle.style.left = `${left}%`;
+                sparkle.style.top = `${top}%`;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                
+                specialMoment.appendChild(sparkle);
+                
+                // Remove sparkle after animation completes
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 2000);
+            }, 800);
+        }
+        
+        // Create floating elements
+        function createFloatingElements() {
+            const container = document.querySelector('.floating-elements');
+            if (!container) return;
+            
+            const elementCount = 8;
+            
+            for (let i = 0; i < elementCount; i++) {
+                const element = document.createElement('div');
+                element.classList.add('floating-element');
+                
+                // Random position
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                
+                // Random size
+                const size = Math.random() * 20 + 5;
+                
+                // Random delay
+                const delay = Math.random() * 10;
+                
+                element.style.left = `${left}%`;
+                element.style.top = `${top}%`;
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(element);
+            }
+        }
+        
+        // Scroll animation for sections
+        function handleScrollAnimation() {
+            const sections = document.querySelectorAll('.section, .dream-intro, .special-moment, .final-section');
+            const contentBlocks = document.querySelectorAll('.content-block');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Animate content blocks with delay
+                        if (entry.target.classList.contains('section')) {
+                            const blocks = entry.target.querySelectorAll('.content-block');
+                            blocks.forEach((block, index) => {
+                                setTimeout(() => {
+                                    block.classList.add('visible');
+                                }, index * 200);
+                            });
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+        
+        // Smooth scroll for scroll indicator
+        function initSmoothScroll() {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            
+            scrollIndicator.addEventListener('click', () => {
+                const dreamIntro = document.querySelector('.dream-intro');
+                dreamIntro.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        }
+        
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            createFallingHearts();
+            createSparkles();
+            createFloatingElements();
+            handleScrollAnimation();
+            initSmoothScroll();
+        });
+    </script>
+  <script src="/assets/nav.js" defer></script>
+</body>
+</html>

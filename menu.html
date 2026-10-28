@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matías &amp; Danna</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --card: #1e1e1e;
+      --accent: #f06ec4;
+      --text: #ffffff;
+      --text-secondary: #e0e0e0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    header { text-align: center; margin-bottom: 3rem; }
+    h1 {
+      color: var(--accent);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 10px rgba(240, 110, 196, 0.3);
+    }
+    .subtitle { color: var(--accent); font-style: italic; opacity: 0.8; }
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      width: 100%;
+    }
+    .menu-item {
+      background-color: var(--card);
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    .menu-item:nth-child(1) { animation-delay: 0.1s; }
+    .menu-item:nth-child(2) { animation-delay: 0.3s; }
+    .menu-item:nth-child(3) { animation-delay: 0.5s; }
+    .menu-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(240, 110, 196, 0.25);
+    }
+    .menu-item .icon { font-size: 2.5rem; }
+    .menu-item h3 { font-size: 1.3rem; }
+    .menu-item p { font-size: 0.9rem; color: var(--text-secondary); opacity: 0.8; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    footer { margin-top: 3rem; color: var(--text-secondary); font-size: 0.85rem; opacity: 0.6; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Matías &amp; Danna</h1>
+    <p class="subtitle">Elige un capítulo de nuestra historia</p>
+  </header>
+
+  <div class="menu-container">
+    <a href="/1-mes/" class="menu-item">
+      <div class="icon">💌</div>
+      <h3>1 mes</h3>
+      <p>Donde todo empezó</p>
+    </a>
+    <a href="/2-meses/" class="menu-item">
+      <div class="icon">🌷</div>
+      <h3>2 meses</h3>
+      <p>Nuestro rincón: historia, contador, cartas y más</p>
+    </a>
+    <a href="/7-meses/" class="menu-item">
+      <div class="icon">👑</div>
+      <h3>7 meses</h3>
+      <p>Para mi amor eterno</p>
+    </a>
+  </div>
+
+  <footer>Hecho con amor para Danna Valeska</footer>
+</body>
+</html>

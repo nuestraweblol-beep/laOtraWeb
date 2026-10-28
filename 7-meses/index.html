@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Mi Amor Eterno</title>
+  <style>
+    :root {
+      --background: #ffffff;
+      --foreground: #374151;
+      --card: #fef2f2;
+      --card-foreground: #dc2626;
+      --primary: #dc2626;
+      --accent: #f59e0b;
+      --border: #e5e7eb;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fef2f2 0%, #fdf2f8 50%, #ffe4e6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .decor {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .decor span {
+      position: absolute;
+      font-size: 2rem;
+      opacity: .3;
+      animation: float 4s ease-in-out infinite;
+    }
+    .decor .s1 { top: 8%;  left: 5%;  animation-delay: 0s; }
+    .decor .s2 { top: 14%; right: 12%; font-size: 1.6rem; animation-delay: 1s; }
+    .decor .s3 { bottom: 20%; left: 10%; font-size: 1.8rem; animation-delay: 2s; }
+    .decor .s4 { top: 20%; left: 48%;  font-size: 2.2rem; animation-delay: .5s; }
+    .decor .s5 { bottom: 16%; right: 16%; font-size: 2.4rem; animation-delay: 1.5s; }
+    .decor .s6 { bottom: 8%;  right: 5%;  font-size: 2.2rem; animation-delay: 2.5s; }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      max-width: 48rem;
+      width: 100%;
+      background: rgba(254, 242, 242, .95);
+      backdrop-filter: blur(6px);
+      border: 2px solid rgba(220, 38, 38, .2);
+      border-radius: 1rem;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+      padding: 2.5rem 1.75rem;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease-out forwards;
+      animation-play-state: paused;
+    }
+    .card.visible { animation-play-state: running; }
+    @media (min-width: 768px) { .card { padding: 4rem; } }
+
+    .header { text-align: center; margin-bottom: 2.5rem; }
+    .icons-row { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .icons-row .heart { font-size: 3rem; color: var(--primary); animation: heartbeat 2.5s ease-in-out infinite; }
+    .icons-row .crown { font-size: 2.2rem; color: var(--accent); animation: float 4s ease-in-out infinite; }
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      animation: slideInLeft 1s ease-out;
+    }
+    @media (min-width: 768px) { h1 { font-size: 3.8rem; } }
+    .rule {
+      width: 8rem;
+      height: 4px;
+      margin: 0 auto;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+
+    .message {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--foreground);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      opacity: 0;
+      transform: translateY(2rem);
+      transition: opacity 1.5s ease, transform 1.5s ease;
+    }
+    .message.visible { opacity: 1; transform: translateY(0); }
+    .message p:nth-child(1) { animation: slideInLeft 1s ease-out; font-weight: 600; color: var(--card-foreground); }
+    .message p:nth-child(2) { animation: slideInRight 1s ease-out .3s backwards; }
+    .message p:nth-child(3) { animation: slideInLeft 1s ease-out .6s backwards; }
+
+    .signature {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 2px solid rgba(220, 38, 38, .3);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      opacity: 0;
+      transform: translateY(1rem);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .signature.visible { opacity: 1; transform: translateY(0); }
+    .signature .typewriter {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 0 auto;
+      width: 0;
+      animation: typewriter 3s steps(40, end) forwards;
+    }
+    .signature .final-line {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      animation: heartbeat 2.5s ease-in-out infinite;
+    }
+
+    .quote-box {
+      margin-top: 2.5rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1.5s ease 1s;
+    }
+    .quote-box.visible { opacity: 1; }
+    .quote-box .inner {
+      background: linear-gradient(90deg, rgba(220,38,38,.08), rgba(245,158,11,.08), rgba(220,38,38,.08));
+      border: 1px solid rgba(220,38,38,.2);
+      border-radius: 1rem;
+      padding: 1.5rem;
+    }
+    .quote-box p { font-style: italic; color: var(--card-foreground); font-weight: 500; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-100px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideInRight { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes heartbeat { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.1); } 50% { transform: scale(1.05); } 75% { transform: scale(1.15); } }
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 33% { transform: translateY(-15px) rotate(2deg); } 66% { transform: translateY(-8px) rotate(-1deg); } }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+  </style>
+</head>
+<body>
+  <div class="decor">
+    <span class="s1">❤️</span>
+    <span class="s2">✦</span>
+    <span class="s3">✨</span>
+    <span class="s4">👑</span>
+    <span class="s5">🌸</span>
+    <span class="s6">❤️</span>
+  </div>
+
+  <div class="card" id="card">
+    <div class="header">
+      <div class="icons-row">
+        <span class="heart">❤️</span>
+        <span class="crown">👑</span>
+        <span class="heart">❤️</span>
+      </div>
+      <h1>Para Mi Amor Eterno</h1>
+      <div class="rule"></div>
+    </div>
+
+    <div class="message" id="message">
+      <p>
+        Hola, mi princesa preciosa. Hoy celebramos otro día increíble, un mesiversario más juntos. ¿Qué podría
+        decirte que no sepas ya? Jajaja…
+      </p>
+      <p>
+        Mi chiquita, hace poco pasamos el tiempo más largo separados, y lo único que aprendí es lo mucho que te
+        extraño. Fue tan distinto despertar sabiendo que no te tenía cerca ni iba a poder verte. La verdad,
+        amanecía "de malas", sin ganas, y recién lo entendí cuando regresaste. El momento en que te vi de nuevo
+        no podía dejar de sonreír; otra vez era demasiado feliz. Estoy seguro de que siempre será así mientras
+        estés a mi lado.
+      </p>
+      <p>
+        Hoy solo quiero agradecerte por hacerme tan feliz, por ser mi razón diaria para querer ser una mejor
+        persona, un mejor profesional y, sobre todo, un buen novio. Vivo realmente emocionado de pensar que
+        nuestro futuro es juntos. Sé que muchas cosas pueden cambiar, y aunque a veces me da miedo perderte,
+        cada día contigo me convence de que lo único que quiero es tenerte siempre a mi lado.
+      </p>
+
+      <div class="signature" id="signature">
+        <p class="typewriter">Te amo con cada parte de mi ser</p>
+        <p class="final-line">❤️ Te amo de aquí a la luna… a pasitos de tortuga. 🐢❤️🌙 ❤️</p>
+      </div>
+    </div>
+
+    <div class="quote-box" id="quote">
+      <div class="inner">
+        <p>
+          "Espero vivir muchísimos mesiversarios y aniversarios más a tu lado, compartiendo cada instante
+          contigo y haciendo que nuestro amor siga creciendo cada día."
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    requestAnimationFrame(() => document.getElementById("card").classList.add("visible"));
+    setTimeout(() => document.getElementById("message").classList.add("visible"), 1500);
+    setTimeout(() => {
+      document.getElementById("signature").classList.add("visible");
+      document.getElementById("quote").classList.add("visible");
+    }, 3000);
+  </script>
+
+  <script src="/assets/nav.js" defer></script>
+</body>
+</html>

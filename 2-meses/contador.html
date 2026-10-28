@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuestro Tiempo Juntos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: black;
+        color: white;
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .text-pink-400 {
+        color: #ec4899;
+      }
+
+      .text-pink-300 {
+        color: #f472b6;
+      }
+
+      .text-pink-200 {
+        color: #fbcfe8;
+      }
+
+      .bg-pink-500 {
+        background-color: #ec4899;
+      }
+
+      .hover\:bg-pink-600:hover {
+        background-color: #db2777;
+      }
+
+      .bg-gray-900\/60 {
+        background-color: rgba(17, 24, 39, 0.6);
+      }
+
+      .bg-gray-800\/80 {
+        background-color: rgba(31, 41, 55, 0.8);
+      }
+
+      .fill-pink-400 {
+        fill: #ec4899;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 50;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .modal-content {
+        background-color: #111827;
+        border-radius: 0.75rem;
+        max-width: 48rem;
+        width: 100%;
+        max-height: 90vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal-header {
+        padding: 1rem;
+        border-bottom: 1px solid #1f2937;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-body {
+        position: relative;
+        height: 50vh;
+        width: 100%;
+      }
+
+      .modal-body img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .modal-footer {
+        padding: 1rem;
+      }
+
+      .hover\:scale-105:hover {
+        transform: scale(1.05);
+      }
+
+      .transition-all {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+      }
+
+      /* Decoraciones de amor */
+      .love-decorations {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .floating-heart {
+        position: absolute;
+        opacity: 0;
+        animation: float-up var(--duration, 15s) ease-in-out infinite;
+        animation-delay: var(--delay, 0s);
+        transform: scale(var(--scale, 1));
+      }
+
+      @keyframes float-up {
+        0% {
+          transform: translateY(100vh) translateX(var(--x-offset, 0))
+            scale(var(--scale, 1)) rotate(var(--rotation, 0deg));
+          opacity: 0;
+        }
+        10% {
+          opacity: var(--opacity, 0.2);
+        }
+        90% {
+          opacity: var(--opacity, 0.2);
+        }
+        100% {
+          transform: translateY(-100px)
+            translateX(var(--x-end, var(--x-offset, 0))) scale(var(--scale, 1))
+            rotate(var(--rotation-end, var(--rotation, 0deg)));
+          opacity: 0;
+        }
+      }
+
+      .glow {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(236, 72, 153, 0.3) 0%,
+          rgba(236, 72, 153, 0) 70%
+        );
+        animation: pulse 8s ease-in-out infinite;
+        opacity: 0.2;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.2;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 0.3;
+        }
+      }
+
+      .love-quote {
+        position: absolute;
+        color: rgba(236, 72, 153, 0.1);
+        font-size: 1.5rem;
+        font-style: italic;
+        white-space: nowrap;
+        pointer-events: none;
+        animation: fade-in-out 20s ease-in-out infinite;
+        animation-delay: var(--delay, 0s);
+      }
+
+      @keyframes fade-in-out {
+        0%,
+        100% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.1;
+        }
+      }
+
+      .sparkle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 10px 2px rgba(236, 72, 153, 0.8);
+        animation: twinkle var(--duration, 5s) ease-in-out infinite;
+        animation-delay: var(--delay, 0s);
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .ribbon {
+        position: absolute;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          rgba(236, 72, 153, 0) 0%,
+          rgba(236, 72, 153, 0.5) 50%,
+          rgba(236, 72, 153, 0) 100%
+        );
+        transform-origin: center;
+        animation: ribbon-float 30s linear infinite;
+        animation-delay: var(--delay, 0s);
+        opacity: 0.2;
+      }
+
+      @keyframes ribbon-float {
+        0% {
+          transform: translateY(100vh) rotate(var(--rotation, 0deg));
+        }
+        100% {
+          transform: translateY(-100px) rotate(var(--rotation, 0deg));
+        }
+      }
+      .navbar {
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(236, 72, 153, 0.2);
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        transition: all 0.3s ease;
+        padding: 0.75rem 0;
+      }
+
+      .navbar.scrolled {
+        box-shadow: 0 4px 20px rgba(236, 72, 153, 0.15);
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      .nav-link {
+        color: white;
+        text-decoration: none;
+        position: relative;
+        transition: color 0.3s ease;
+        font-size: 1rem;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #ec4899;
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #f472b6;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      .nav-link.active {
+        color: #ec4899;
+      }
+
+      .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: #ec4899;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 50;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .mobile-menu.open {
+        opacity: 1;
+        pointer-events: auto;
+        display: flex;
+      }
+
+      .mobile-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+
+      .mobile-link {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .mobile-link:hover,
+      .mobile-link.active {
+        color: #ec4899;
+      }
+
+      .close-menu {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: #ec4899;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-toggle {
+          display: block;
+        }
+
+        .nav-container {
+          justify-content: flex-end;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <div class="nav-container">
+          <div class="nav-links">
+            <a href="menu.html" class="nav-link active">Inicio</a>
+            <a href="historia.html" class="nav-link">Historia</a>
+            <a href="contador.html" class="nav-link">Contador</a>
+            <a href="cartas.html" class="nav-link">Cartas</a>
+            <!--<a href="baraja.html" class="nav-link">52 Razones</a>-->
+          </div>
+          <button class="mobile-toggle" id="mobile-toggle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Menú móvil -->
+    <div class="mobile-menu" id="mobile-menu">
+      <button class="close-menu" id="close-menu">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="mobile-links">
+        <a href="menu.html" class="mobile-link active">Inicio</a>
+        <a href="historia.html" class="mobile-link">Historia</a>
+        <a href="contador.html" class="mobile-link">Contador</a>
+        <a href="cartas.html" class="mobile-link">Cartas</a>
+        <a href="baraja.html" class="mobile-link">52 Razones</a>
+        </div>
+    </div>
+    <!-- Decoraciones de amor -->
+    <div class="love-decorations" id="love-decorations">
+      <!-- Se generarán dinámicamente con JavaScript -->
+    </div>
+
+    <div
+      class="min-h-screen flex flex-col items-center justify-start pt-10 px-4"
+    >
+      <h1 class="text-4xl md:text-6xl font-bold text-pink-400 mb-2">
+        Nuestro Tiempo Juntos
+      </h1>
+      <p class="text-pink-300 italic text-center mb-12">
+        "Cada momento contigo es un verso en nuestro poema de amor"
+      </p>
+
+      <!-- Contador principal -->
+      <div
+        class="w-full max-w-4xl bg-gray-900/60 rounded-xl p-6 mb-12 shadow-lg"
+      >
+        <h2
+          class="text-2xl text-pink-400 text-center mb-6 flex items-center justify-center gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-6 w-6"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>Tiempo desde nuestro comienzo</span>
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div
+            class="bg-gray-800/80 rounded-lg p-4 flex flex-col items-center justify-center shadow-inner"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-6 w-6 text-pink-400"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span
+              class="text-3xl md:text-5xl font-bold text-pink-400 my-2"
+              id="days"
+              >0</span
+            >
+            <span class="text-gray-300 text-sm">Días</span>
+          </div>
+          <div
+            class="bg-gray-800/80 rounded-lg p-4 flex flex-col items-center justify-center shadow-inner"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-6 w-6 text-pink-400"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span
+              class="text-3xl md:text-5xl font-bold text-pink-400 my-2"
+              id="hours"
+              >0</span
+            >
+            <span class="text-gray-300 text-sm">Horas</span>
+          </div>
+          <div
+            class="bg-gray-800/80 rounded-lg p-4 flex flex-col items-center justify-center shadow-inner"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-6 w-6 text-pink-400"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span
+              class="text-3xl md:text-5xl font-bold text-pink-400 my-2"
+              id="minutes"
+              >0</span
+            >
+            <span class="text-gray-300 text-sm">Minutos</span>
+          </div>
+          <div
+            class="bg-gray-800/80 rounded-lg p-4 flex flex-col items-center justify-center shadow-inner"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-6 w-6 text-pink-400"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span
+              class="text-3xl md:text-5xl font-bold text-pink-400 my-2"
+              id="seconds"
+              >0</span
+            >
+            <span class="text-gray-300 text-sm">Segundos</span>
+          </div>
+        </div>
+
+        <div class="mt-6 text-center">
+          <p class="text-pink-200">
+            Comenzamos el 31 de enero de 2025 a las 5:00 PM
+          </p>
+        </div>
+      </div>
+
+      <!-- Sección de memorias con imágenes -->
+      <h2 class="text-3xl text-pink-400 mb-6 flex items-center gap-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="#ec4899"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-6 w-6"
+        >
+          <path
+            d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+          ></path>
+        </svg>
+        <span>Nuestras Memorias</span>
+      </h2>
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl"
+        id="memorias-container"
+      >
+        <!-- Las tarjetas de memoria se generarán dinámicamente con JavaScript -->
+      </div>
+
+      <!-- Botón para agregar nuevas memorias -->
+      <!-- <button
+        class="mt-10 flex items-center gap-2 bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full transition-colors shadow-lg"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-5 w-5"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        Agregar nueva memoria
+      </button> -->
+
+      <!-- Modal para ver imágenes -->
+      <div id="imageModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="text-xl text-pink-400" id="modal-title"></h3>
+            <button
+              onclick="closeModal()"
+              class="text-gray-400 hover:text-white"
+            >
+              ✕
+            </button>
+          </div>
+          <div class="modal-body">
+            <img id="modal-image" src="/placeholder.svg" alt="" />
+          </div>
+          <div class="modal-footer">
+            <p class="text-gray-300 mb-2" id="modal-description"></p>
+            <div class="flex items-center text-sm text-gray-400">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-4 w-4 mr-1"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span id="modal-date"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Fecha de inicio: 31 de enero de 2025 a las 5:00 PM
+      const startDate = new Date(2025, 0, 31, 17, 0, 0);
+
+      // Imágenes de muestra (puedes reemplazarlas con tus propias imágenes)
+      const memorias = [
+        {
+          id: 1,
+          title: "El beso más mágico",
+          description:
+            "Ese beso... el que aún me hace sonreír cada vez que lo recuerdo.",
+          image: "img/beso.jpeg",
+          date: "29 de enero, 2025",
+        },
+        {
+          id: 2,
+          title: "El sí mas importante de mi vida",
+          description: "Ese día dijiste que sí a ser mi novia, y mi vida cambió para siempre. Fue el inicio de nuestra historia más bonita, la que hoy seguimos escribiendo juntos.",
+          image: "img/novios.jpeg",
+          date: "31 de enero, 2025",
+        },
+        {
+          id: 3,
+          title: "Nuestro primer San Valentín juntos",
+          description:
+            "Eres mi san Valentín eterno, en cada latido, en cada mirada, en cada suspiro.",
+          image: "img/14.jpeg",
+          date: "14 de febrero, 2025",
+        },
+        {
+          id: 4,
+          title: "Nuestro primer mes de novios",
+          description:
+            "Solo ha pasado un mes, pero siento que te quiero desde siempre. Qué suerte tenerte, amor.",
+          image: "img/1mes.jpeg",
+          date: "1 de marzo, 2025",
+        },
+        {
+          id: 5,
+          title: "Los dos meses más felices de mi vida",
+          description:
+            "Dos meses contigo… y cada día me convenzo más de que encontré a la persona correcta. Gracias por tanto amor, por tanto tú.",
+          image: "img/2mes.jpeg",
+          date: "31 de marzo, 2025",
+        },
+        {
+          id: 6,
+          title: "Tres meses de puro amor",
+          description:
+            "Tres meses a tu lado y todo sigue siendo mágico. Gracias por hacerme tan feliz, por tu ternura, tu paciencia y tu forma de quererme.",
+          image: "img/3mes.jpeg",
+          date: "30 de abril, 2025",
+        }
+        
+      ];
+
+      // Frases románticas para el fondo
+      const loveQuotes = [
+        "Te amo más cada día",
+        "Eres mi persona favorita",
+        "Contigo todo es mejor",
+        "Eres el amor de mi vida",
+        "Para siempre juntos",
+        "Mi corazón es tuyo",
+        "Cada día te quiero más",
+        "Eres mi sueño hecho realidad",
+        "Nuestro amor es eterno",
+        "Tú y yo, siempre",
+      ];
+
+      // Actualizar el contador cada segundo
+      function updateCounter() {
+        const now = new Date();
+        const difference = now.getTime() - startDate.getTime();
+
+        // Convertir la diferencia a días, horas, minutos y segundos
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor(
+          (difference % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        // Actualizar los elementos HTML
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
+      }
+
+      // Generar las tarjetas de memoria
+      function generateMemoryCards() {
+        const container = document.getElementById("memorias-container");
+
+        memorias.forEach((memoria, index) => {
+          const card = document.createElement("div");
+          card.className =
+            "bg-gray-900/60 rounded-xl overflow-hidden cursor-pointer transform transition-all hover:scale-105 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)]";
+          card.onclick = () => openImageModal(index);
+
+          card.innerHTML = `
+          <div class="relative h-48 w-full">
+            <img src="${memoria.image}" alt="${memoria.title}" class="object-cover w-full h-full">
+            <div class="absolute bottom-0 right-0 p-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ec4899" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-pink-400">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="text-xl text-pink-400 mb-1">${memoria.title}</h3>
+            <p class="text-gray-300 text-sm mb-2">${memoria.description}</p>
+            <div class="flex items-center text-xs text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 mr-1">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              ${memoria.date}
+            </div>
+          </div>
+        `;
+
+          container.appendChild(card);
+        });
+      }
+
+      // Abrir el modal de imagen
+      function openImageModal(index) {
+        const modal = document.getElementById("imageModal");
+        const memoria = memorias[index];
+
+        document.getElementById("modal-title").textContent = memoria.title;
+        document.getElementById("modal-image").src = memoria.image;
+        document.getElementById("modal-image").alt = memoria.title;
+        document.getElementById("modal-description").textContent =
+          memoria.description;
+        document.getElementById("modal-date").textContent = memoria.date;
+
+        modal.style.display = "flex";
+      }
+
+      // Cerrar el modal de imagen
+      function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+      }
+
+      // Crear decoraciones de amor
+      function createLoveDecorations() {
+        const container = document.getElementById("love-decorations");
+
+        // Crear corazones flotantes
+        for (let i = 0; i < 20; i++) {
+          const heart = document.createElement("div");
+          heart.className = "floating-heart";
+
+          // Tamaño aleatorio
+          const scale = 0.5 + Math.random() * 1.5;
+
+          // Posición y animación aleatorias
+          const xOffset = Math.random() * 100 + "vw";
+          const xEnd = Math.random() * 40 - 20 + "vw";
+          const delay = Math.random() * 15 + "s";
+          const duration = 15 + Math.random() * 20 + "s";
+          const rotation = Math.random() * 360 + "deg";
+          const rotationEnd = Math.random() * 360 + "deg";
+          const opacity = 0.1 + Math.random() * 0.3;
+
+          heart.style.setProperty("--x-offset", xOffset);
+          heart.style.setProperty("--x-end", xEnd);
+          heart.style.setProperty("--delay", delay);
+          heart.style.setProperty("--duration", duration);
+          heart.style.setProperty("--scale", scale);
+          heart.style.setProperty("--rotation", rotation);
+          heart.style.setProperty("--rotation-end", rotationEnd);
+          heart.style.setProperty("--opacity", opacity);
+
+          heart.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="${
+            30 * scale
+          }" height="${
+            30 * scale
+          }" viewBox="0 0 24 24" fill="#ec4899" stroke="#ec4899" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="${opacity}">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+          </svg>
+        `;
+
+          container.appendChild(heart);
+        }
+
+        // Crear brillos
+        for (let i = 0; i < 5; i++) {
+          const glow = document.createElement("div");
+          glow.className = "glow";
+
+          const size = 100 + Math.random() * 200;
+          const top = Math.random() * 100 + "vh";
+          const left = Math.random() * 100 + "vw";
+
+          glow.style.width = size + "px";
+          glow.style.height = size + "px";
+          glow.style.top = top;
+          glow.style.left = left;
+
+          container.appendChild(glow);
+        }
+
+        // Crear frases de amor
+        for (let i = 0; i < 8; i++) {
+          const quote = document.createElement("div");
+          quote.className = "love-quote";
+
+          const top = Math.random() * 100 + "vh";
+          const left = Math.random() * 100 + "vw";
+          const delay = Math.random() * 20 + "s";
+
+          quote.style.top = top;
+          quote.style.left = left;
+          quote.style.setProperty("--delay", delay);
+
+          quote.textContent =
+            loveQuotes[Math.floor(Math.random() * loveQuotes.length)];
+
+          container.appendChild(quote);
+        }
+
+        // Crear destellos
+        for (let i = 0; i < 30; i++) {
+          const sparkle = document.createElement("div");
+          sparkle.className = "sparkle";
+
+          const top = Math.random() * 100 + "vh";
+          const left = Math.random() * 100 + "vw";
+          const delay = Math.random() * 5 + "s";
+          const duration = 3 + Math.random() * 4 + "s";
+
+          sparkle.style.top = top;
+          sparkle.style.left = left;
+          sparkle.style.setProperty("--delay", delay);
+          sparkle.style.setProperty("--duration", duration);
+
+          container.appendChild(sparkle);
+        }
+
+        // Crear cintas
+        for (let i = 0; i < 10; i++) {
+          const ribbon = document.createElement("div");
+          ribbon.className = "ribbon";
+
+          const width = 50 + Math.random() * 200;
+          const left = Math.random() * 100 + "vw";
+          const delay = Math.random() * 15 + "s";
+          const rotation = Math.random() * 180 - 90 + "deg";
+
+          ribbon.style.width = width + "px";
+          ribbon.style.left = left;
+          ribbon.style.setProperty("--delay", delay);
+          ribbon.style.setProperty("--rotation", rotation);
+
+          container.appendChild(ribbon);
+        }
+      }
+
+      // Inicializar la página
+      document.addEventListener("DOMContentLoaded", function () {
+        // Generar las tarjetas de memoria
+        generateMemoryCards();
+
+        // Crear decoraciones de amor
+        createLoveDecorations();
+
+        // Actualizar el contador inmediatamente y luego cada segundo
+        updateCounter();
+        setInterval(updateCounter, 1000);
+
+        // Cerrar el modal al hacer clic fuera del contenido
+        document
+          .getElementById("imageModal")
+          .addEventListener("click", function (event) {
+            if (event.target === this) {
+              closeModal();
+            }
+          });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileToggle = document.getElementById("mobile-toggle");
+        const closeMenu = document.getElementById("close-menu");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const navbar = document.getElementById("navbar");
+
+        mobileToggle.addEventListener("click", function () {
+          mobileMenu.classList.add("open");
+        });
+
+        closeMenu.addEventListener("click", function () {
+          mobileMenu.classList.remove("open");
+        });
+
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 10) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        const currentPage = window.location.pathname.split("/").pop();
+        const navLinks = document.querySelectorAll(".nav-link");
+        const mobileLinks = document.querySelectorAll(".mobile-link");
+
+        function setActiveLinks(links) {
+          links.forEach((link) => {
+            const href = link.getAttribute("href");
+            if (
+              href === currentPage ||
+              (currentPage === "" && href === "index.html")
+            ) {
+              link.classList.add("active");
+            } else {
+              link.classList.remove("active");
+            }
+          });
+        }
+
+        setActiveLinks(navLinks);
+        setActiveLinks(mobileLinks);
+      });
+    </script>
+    <script src="/assets/nav.js" defer></script>
+</body>
+</html>

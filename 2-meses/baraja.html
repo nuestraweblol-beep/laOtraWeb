@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>52 Razones Por Las Que Te Amo</title>
+    <style>
+      /* Estilos generales */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #121212;
+        color: #fff;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-image: radial-gradient(
+            circle at 10% 20%,
+            rgba(90, 20, 90, 0.1) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 80% 50%,
+            rgba(90, 20, 90, 0.1) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 40% 80%,
+            rgba(90, 20, 90, 0.1) 0%,
+            transparent 20%
+          );
+      }
+
+      /* Encabezado */
+      header {
+        text-align: center;
+        padding: 2rem 1rem;
+        position: relative;
+      }
+
+      h1 {
+        color: #e083e0;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 0 10px rgba(224, 131, 224, 0.3);
+      }
+
+      .subtitle {
+        color: #e083e0;
+        font-style: italic;
+        margin-bottom: 2rem;
+        opacity: 0.8;
+      }
+
+      /* Menú hamburguesa */
+      .menu-btn {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        background-color: rgba(224, 131, 224, 0.8);
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 0 10px rgba(224, 131, 224, 0.5);
+      }
+
+      .menu-btn span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .menu-btn span::before,
+      .menu-btn span::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        transition: all 0.3s ease;
+      }
+
+      .menu-btn span::before {
+        transform: translateY(-8px);
+      }
+
+      .menu-btn span::after {
+        transform: translateY(8px);
+      }
+
+      /* Contenedor principal */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+
+      /* Sección de introducción */
+      .intro {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 1.5rem;
+        background-color: rgba(30, 30, 40, 0.7);
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .intro p {
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      .heart-icon {
+        color: #e083e0;
+        font-size: 1.5rem;
+        margin: 0 0.5rem;
+      }
+
+      /* Contenedor de cartas */
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      /* Estilos de las cartas */
+      .card {
+        position: relative;
+        height: 220px;
+        perspective: 1000px;
+        cursor: pointer;
+      }
+
+      .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+      }
+
+      .card.flipped .card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .card-front {
+        background-color: #2a2a3a;
+        border: 2px solid #e083e0;
+      }
+
+      .card-back {
+        background-color: #2a2a3a;
+        transform: rotateY(180deg);
+        border: 2px solid #e083e0;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .card-suit {
+        position: absolute;
+        font-size: 1.2rem;
+      }
+
+      .card-suit.top-left {
+        top: 10px;
+        left: 10px;
+      }
+
+      .card-suit.bottom-right {
+        bottom: 10px;
+        right: 10px;
+        transform: rotate(180deg);
+      }
+
+      .card-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .card-message {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        max-height: 120px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+        scrollbar-width: thin;
+        scrollbar-color: #e083e0 #2a2a3a;
+      }
+
+      .card-message::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      .card-message::-webkit-scrollbar-track {
+        background: #2a2a3a;
+      }
+
+      .card-message::-webkit-scrollbar-thumb {
+        background-color: #e083e0;
+        border-radius: 10px;
+      }
+
+      .read-more-btn {
+        background-color: #e083e0;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 5px 10px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        margin-top: 5px;
+        transition: all 0.3s ease;
+      }
+
+      .read-more-btn:hover {
+        background-color: #c06dc0;
+      }
+
+      .card-heart {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        color: #e083e0;
+        font-size: 1.2rem;
+      }
+
+      /* Estilos para los corazones y diamantes */
+      .hearts,
+      .diamonds {
+        color: #e083e0;
+      }
+
+      /* Estilos para las picas y tréboles */
+      .spades,
+      .clubs {
+        color: white;
+      }
+
+      /* Estilos para los comodines */
+      .joker-color {
+        background: linear-gradient(
+          135deg,
+          #e083e0 0%,
+          #e083e0 50%,
+          white 50%,
+          white 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .joker-bw {
+        color: white;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .joker-card .card-front {
+        background-color: #1a1a2a;
+        border: 2px solid #e083e0;
+        background-image: radial-gradient(
+          circle at center,
+          #3a3a4a 0%,
+          #1a1a2a 100%
+        );
+      }
+
+      .joker-text {
+        font-size: 2.5rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Estilos para los comodines */
+      .joker {
+        background: linear-gradient(45deg, #e083e0, #8a2be2);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 5px rgba(224, 131, 224, 0.3);
+      }
+
+      /* Botón para ver todas las cartas */
+      .view-all-btn {
+        display: block;
+        margin: 2rem auto;
+        padding: 1rem 2rem;
+        background-color: #e083e0;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(224, 131, 224, 0.5);
+      }
+
+      .view-all-btn:hover {
+        background-color: #c06dc0;
+        transform: translateY(-3px);
+      }
+
+      /* Botón para mezclar cartas */
+      .shuffle-btn {
+        display: block;
+        margin: 0 auto 2rem;
+        padding: 0.8rem 1.8rem;
+        background-color: #8a2be2;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
+      }
+
+      .shuffle-btn:hover {
+        background-color: #7a1bd2;
+        transform: translateY(-3px);
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        margin-top: 2rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+      }
+
+      /* Modal para ver todas las cartas */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1001;
+        overflow-y: auto;
+        padding: 2rem 0;
+      }
+
+      .modal-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: #1a1a2a;
+        border-radius: 15px;
+        position: relative;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 2rem;
+        color: #e083e0;
+        cursor: pointer;
+      }
+
+      .modal-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .modal-card {
+        background-color: #2a2a3a;
+        border: 2px solid #e083e0;
+        border-radius: 10px;
+        padding: 1.5rem;
+      }
+
+      .modal-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(224, 131, 224, 0.3);
+      }
+
+      .modal-card-title {
+        font-size: 1.2rem;
+        color: #e083e0;
+      }
+
+      /* Modal para mensaje largo */
+      .long-message-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1002;
+        overflow-y: auto;
+        padding: 2rem 0;
+      }
+
+      .long-message-content {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: #1a1a2a;
+        border-radius: 15px;
+        position: relative;
+      }
+
+      .long-message-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(224, 131, 224, 0.3);
+      }
+
+      .long-message-title {
+        font-size: 1.5rem;
+        color: #e083e0;
+      }
+
+      .long-message-body {
+        line-height: 1.6;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Animaciones */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 1s ease-in;
+      }
+
+      @keyframes shuffle {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        25% {
+          transform: translateY(-20px) rotate(-5deg);
+        }
+        50% {
+          transform: translateY(0) rotate(0deg);
+        }
+        75% {
+          transform: translateY(-10px) rotate(5deg);
+        }
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+      }
+
+      .shuffling {
+        animation: shuffle 0.5s ease-in-out;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .cards-container {
+          grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+          gap: 1rem;
+        }
+
+        .card {
+          height: 180px;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .modal-cards {
+          grid-template-columns: 1fr;
+        }
+      }
+      .navbar {
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(236, 72, 153, 0.2);
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        transition: all 0.3s ease;
+        padding: 0.75rem 0;
+      }
+
+      .navbar.scrolled {
+        box-shadow: 0 4px 20px rgba(236, 72, 153, 0.15);
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      .nav-link {
+        color: white;
+        text-decoration: none;
+        position: relative;
+        transition: color 0.3s ease;
+        font-size: 1rem;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #ec4899;
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #f472b6;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      .nav-link.active {
+        color: #ec4899;
+      }
+
+      .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: #ec4899;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 50;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .mobile-menu.open {
+        opacity: 1;
+        pointer-events: auto;
+        display: flex;
+      }
+
+      .mobile-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+
+      .mobile-link {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .mobile-link:hover,
+      .mobile-link.active {
+        color: #ec4899;
+      }
+
+      .close-menu {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: #ec4899;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-toggle {
+          display: block;
+        }
+
+        .nav-container {
+          justify-content: flex-end;
+        }
+      }
+      .locked-icon {
+        opacity: 0.5;
+        filter: grayscale(100%);
+      }
+      .envelope.locked {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Menú hamburguesa -->
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <div class="nav-container">
+          <div class="nav-links">
+            <a href="menu.html" class="nav-link active">Inicio</a>
+            <a href="historia.html" class="nav-link">Historia</a>
+            <a href="contador.html" class="nav-link">Contador</a>
+            <a href="cartas.html" class="nav-link">Cartas</a>
+            <!--<a href="baraja.html" class="nav-link">52 Razones</a> -->
+          </div>
+          <button class="mobile-toggle" id="mobile-toggle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Menú móvil -->
+    <div class="mobile-menu" id="mobile-menu">
+      <button class="close-menu" id="close-menu">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="mobile-links">
+        <a href="menu.html" class="mobile-link active">Inicio</a>
+        <a href="historia.html" class="mobile-link">Historia</a>
+        <a href="contador.html" class="mobile-link">Contador</a>
+        <a href="cartas.html" class="mobile-link">Cartas</a>
+        <a href="baraja.html" class="mobile-link">52 Razones</a>
+      </div>
+    </div>
+
+    <!-- Encabezado -->
+    <header>
+      <h1>52 Razones Por Las Que Te Amo</h1>
+      <p class="subtitle">52 razones se quedán cortas para decirte todo lo que siento.</p>
+    </header>
+
+    <!-- Contenido principal -->
+    <div class="container">
+      <!-- Introducción -->
+      <div class="intro fade-in">
+        <p>
+          Haz clic en cada carta para descubrir el mensaje.
+          <span class="heart-icon">♥</span>
+        </p>
+      </div>
+
+      <!-- Botón para mezclar cartas -->
+      <button class="shuffle-btn" id="shuffleBtn">Mezclar cartas</button>
+
+      <!-- Contenedor de cartas -->
+      <div class="cards-container" id="cardsContainer">
+        <!-- Las cartas se generarán con JavaScript -->
+      </div>
+
+      <!-- Botón para ver todas las cartas -->
+      <button class="view-all-btn" id="viewAllBtn">
+        Ver todas las razones
+      </button>
+    </div>
+
+    <!-- Modal para ver todas las cartas -->
+    <div class="modal" id="cardsModal">
+      <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <h2 style="color: #e083e0; text-align: center; margin-bottom: 1.5rem">
+          Todas las razones por las que te amo
+        </h2>
+        <div class="modal-cards" id="modalCards">
+          <!-- Las tarjetas del modal se generarán con JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para mensajes largos -->
+    <div class="long-message-modal" id="longMessageModal">
+      <div class="long-message-content">
+        <span class="close-modal" id="closeLongMessage">&times;</span>
+        <div class="long-message-header">
+          <h3 class="long-message-title" id="longMessageTitle"></h3>
+          <span id="longMessageSuit" class="hearts"></span>
+        </div>
+        <div class="long-message-body" id="longMessageBody">
+          <!-- El contenido del mensaje largo se insertará aquí -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Con todo mi amor, para ti ♥</p>
+      <p>Creado con amor - 2025</p>
+    </footer>
+
+    <script>
+      // Datos de las cartas (52 razones + 2 comodines)
+      const cardData = [
+        // Corazones
+        {
+          suit: "hearts",
+          value: "A",
+          message: "Me hiciste volver a creer que la magia es real.",
+          longMessage:
+            "Me hiciste volver a creer que la magia es real. No es solo una frase bonita, es una verdad que siento en cada momento contigo. Porque cada TE AMO es una emoción real, una experiencia compartida y un sentimiento que realmente lo siento en el alma. Gracias por ser esa razón diaria que hace que todo tenga sentido.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "2",
+          message: "Amo imaginar NUESTRO futuro.",
+          longMessage:
+            "Amo imaginar NUESTRO futuro. Y eso no es algo cualquiera, es algo que define lo que siento por ti, lo que vives en mí. Por eso te amo con todo mi ser.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "3",
+          message: "Me levanto feliz cada día por ti.",
+          longMessage:
+            "¿Sabías que me levanto feliz cada día por ti? No solo lo pienso, en verdad lo siento con cada parte de mí. Es uno de esos detalles que me hacen enamorarme aún más de ti cada día.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "4",
+          message: "Besarte es mágico.",
+          longMessage:
+            "Besarte es mágico. Porque me hace sentir completo y feliz contigo.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "5",
+          message: "Me encanta caminar de tu lado",
+          longMessage:
+            "Me encanta caminar de tu lado. No importa el cuándo ni el dónde.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "6",
+          message: "Eres todo lo que siempre soñé.",
+          longMessage:
+            "Eres todo lo que siempre soñé. Pero contigo todo es posible, todo es distinto, todo es mágico.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "7",
+          message: "Me haces desear un futuro mejor.",
+          longMessage:
+            "Me haces desear un futuro mejor. Lo pienso y sonrío, porque tenerte me hace sentir que lo imposible se volvió real.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "8",
+          message: "Contigo puedo hablar de todo.",
+          longMessage:
+            "Contigo puedo hablar de todo... no me da miedo decirte todo lo que pasa por mi cabeza.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "9",
+          message: "Tus brazos me calman.",
+          longMessage:
+            "Tus brazos me calman. Porque entre tantas cosas bellas que hay en la vida, tú eres mi favorita.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "10",
+          message: "Me haces sentir amado.",
+          longMessage:
+            "Me haces sentir amado. Porque es verdad, porque eres tú, porque no hay nadie como tú.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "J",
+          message: "No dejo de pensar en ti.",
+          longMessage:
+            "No dejo de pensar en ti... ni por un segundo, ni por un minuto. Desde que te conocí, nunca sales de mi mente.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "Q",
+          message: "Te amo por ser tú.",
+          longMessage:
+            "Te amo por ser tú... porque eres lo que siempre soñé. Y ahora que te tengo, no te pienso soltar.",
+          isLong: true,
+        },
+        {
+          suit: "hearts",
+          value: "K",
+          message: "Amo perderme en tus ojos.",
+          longMessage:
+            "Amo perderme en tus ojos... porque son la luz que ilumina mi vida.",
+          isLong: true,
+        },
+
+        // Diamantes
+        {
+          suit: "diamonds",
+          value: "A",
+          message: "Mi plan favorito: Tú + Un lugar nuevo.",
+          longMessage:
+            "Mi plan favorito: Tú + Un lugar nuevo... conocer lugares contigo se volvió mi actividad favorita desde que te conocí.",
+          isLong: true,
+        },
+        {
+          suit: "diamonds",
+          value: "2",
+          message: "Me recordaste quién soy.",
+          longMessage:
+            "Me recordaste quién soy... porque entendí que no debo ser otra persona para encajar contigo.",
+          isLong: true,
+        },
+        {
+          suit: "diamonds",
+          value: "3",
+          message: "Me encanta no hacer nada... si es contigo.",
+          longMessage:
+            "Me encanta no hacer nada... si es contigo. Podría abrazarte, besarte, mirarte y hacer todo, pero solo si es contigo.",
+          isLong: true,
+        },
+        /*{ 
+    suit: 'diamonds', 
+    value: '4', 
+    message: 'Amo tu creatividad y cómo ves posibilidades donde otros no.', 
+    longMessage: 'Mensaje largo sobre tu creatividad...',
+    isLong: true 
+},*/
+        {
+          suit: "diamonds",
+          value: "5",
+          message: "Si estás conmigo nada me falta.",
+          longMessage:
+            "Si estás conmigo nada me falta... porque eres mi único amor, mi lugar seguro y mi lugar feliz.",
+          isLong: true,
+        },
+        {
+          suit: "diamonds",
+          value: "6",
+          message: "A tu lado mi vida tiene sentido.",
+          longMessage:
+            "A tu lado mi vida tiene sentido... porque me diste una razón para buscar ser una mejor persona.",
+          isLong: true,
+        },
+        {
+          suit: "diamonds",
+          value: "7",
+          message: "Ves lo bueno hasta en mis defectos.",
+          longMessage:
+            "Ves lo bueno hasta en mis defectos... siempre me apoyas o me haces animar en lugar de juzgarme.",
+          isLong: true,
+        },
+        {
+          suit: "diamonds",
+          value: "8",
+          message: "Eres mi hogar.",
+          longMessage:
+            "Eres mi hogar... porque contigo me siento en paz y seguro.",
+          isLong: true,
+        },
+        {
+          suit: "diamonds",
+          value: "9",
+          message: "Me haces sentir especial.",
+          longMessage:
+            "Me haces sentir especial... porque me demuestras un amor que nunca antes había sentido.",
+          isLong: true,
+        },
+        {
+          suit: "diamonds",
+          value: "10",
+          message: "Amo tus cartas.",
+          longMessage:
+            "Amo tus cartas... porque me hacen sentir lo mucho que me amas y piensas en mí.",
+          isLong: true,
+        },
+        {
+          suit: "diamonds",
+          value: "J",
+          message: "Eres el mensaje que siempre espero.",
+          longMessage:
+            "Eres el mensaje que siempre espero... porque eres la única persona con la que disfruto hablar todo el tiempo aunque no tengamos de qué hablar.",
+          isLong: true,
+        },
+        {
+          suit: "diamonds",
+          value: "Q",
+          message: "Nunca te cansas de mí.",
+          longMessage:
+            "Nunca te cansas de mí... siempre pensé que todas las personas se cansan de interactuar conmigo, contigo jamás lo he sentido.",
+          isLong: true,
+        },
+        {
+          suit: "diamonds",
+          value: "K",
+          message: "Iluminas mi vida.",
+          longMessage:
+            "Iluminas mi vida... amo pensar que eres mi única razón de ser día a día.",
+          isLong: true,
+        },
+        // Tréboles
+        {
+          suit: "clubs",
+          value: "A",
+          message: "Desde que te conocí, mi vida tiene un propósito",
+          longMessage:
+            "Desde que te conocí, mi vida tiene un propósito... un futuro juntos y un futuro mejor.",
+          isLong: true,
+        },
+        /*{ 
+    suit: 'clubs', 
+    value: '2', 
+    message: 'Amo tu autenticidad, nunca pretendes ser alguien que no eres.', 
+    longMessage: 'Mensaje largo sobre tu autenticidad...',
+    isLong: true 
+},*/
+        {
+          suit: "clubs",
+          value: "3",
+          message: "Tu forma de ser y amar.",
+          longMessage:
+            "Tu forma de ser y amar... desde que te conocí me hiciste sentir especial y único.",
+          isLong: true,
+        },
+        {
+          suit: "clubs",
+          value: "4",
+          message: "Fue mi corazón quien te eligió.",
+          longMessage:
+            "Fue mi corazón quien te eligió... porque jamás pensé que me volvería a enamorar, pero desde la primera vez que te vi. Me enamoré y después de conocernos, te amé y te amo con cada parte de mi ser.",
+          isLong: true,
+        },
+        {
+          suit: "clubs",
+          value: "5",
+          message: "Mi familia siempre pregunta por ti.",
+          longMessage:
+            "Mi familia siempre pregunta por ti... además de ser la primera persona que presenté a mi familia, saben lo especial que eres para mí.",
+          isLong: true,
+        },
+        {
+          suit: "clubs",
+          value: "6",
+          message: "A tu lado el tiempo vuela.",
+          longMessage:
+            "A tu lado el tiempo vuela... no es algo bueno, pero me hace dar cuenta de lo increíble que es pasar tiempo contigo.",
+          isLong: true,
+        },
+        {
+          suit: "clubs",
+          value: "7",
+          message: "Eres mi mundo entero.",
+          longMessage:
+            "Eres mi mundo entero... porque me das felicidad y la seguridad de querer seguir adelante juntos siempre.",
+          isLong: true,
+        },
+        {
+          suit: "clubs",
+          value: "8",
+          message: "Eres mi hogar.",
+          longMessage:
+            "Eres mi hogar... porque a tu lado puedo descansar de todos los problemas que me rodean.",
+          isLong: true,
+        },
+        {
+          suit: "clubs",
+          value: "9",
+          message: "Amo tus detalles.",
+          longMessage:
+            "Amo tus detalles... porque son lo que me hacen sentir especial, cada uno me da demasiada felicidad.",
+          isLong: true,
+        },
+        {
+          suit: "clubs",
+          value: "10",
+          message: "Tu sonrisa me hace feliz.",
+          longMessage:
+            "Tu sonrisa me hace feliz... jamás pensé que ver a alguien feliz me alegraría la vida, ahora el verte feliz es mi vida.",
+          isLong: true,
+        },
+        {
+          suit: "clubs",
+          value: "J",
+          message: "Me das paz.",
+          longMessage:
+            "Me das paz... vivo tranquilo al saber que tengo una mujer tan increíble a mi lado.",
+          isLong: true,
+        },
+        {
+          suit: "clubs",
+          value: "Q",
+          message: "Tu voz me enamora.",
+          longMessage:
+            "Tu voz me enamora... porque cada que te escucho, estoy seguro de que es la voz que quiero oír en todas mis mañanas.",
+          isLong: true,
+        },
+        {
+          suit: "clubs",
+          value: "K",
+          message: "Mi vida es mejor contigo.",
+          longMessage:
+            "Mi vida es mejor contigo... desde que llegaste toda mi vida cambió para bien.",
+          isLong: true,
+        },
+        // Picas
+        {
+          suit: "spades",
+          value: "A",
+          message: "Amo tus notas.",
+          longMessage:
+            "Amo tus notas... cada palabra que me dedicas me hace sentir único para ti.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "2",
+          message: "Amo que me respondas aunque te estés durmiendo...",
+          longMessage:
+            "Amo que me respondas aunque te estés durmiendo... me demuestra que en verdad te gusta hablar conmigo hasta no poder más.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "3",
+          message: "No me juzgas.",
+          longMessage:
+            "No me juzgas... por mis miedos, mis inseguridades ni mi forma de ser.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "4",
+          message: "Me quieres tal como soy.",
+          longMessage:
+            "Me quieres tal como soy... no necesitas cambiarme porque me amas tal y como soy.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "5",
+          message: "Eres perfecta.",
+          longMessage:
+            "Eres perfecta... porque tanto tu interior como exterior no tienen ningún defecto.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "6",
+          message: "Amo tus dramas.",
+          longMessage:
+            "Amo tus dramas... porque amo besarte, abrazarte y mimarte mientras estás enojada, y que sueltes una sonrisa sin poder evitarlo.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "7",
+          message: "Me valoras.",
+          longMessage:
+            "Me valoras... nunca creí que a nadie le importaría mi esfuerzo por ser una buena persona, buen amigo y contigo un buen novio.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "8",
+          message: "Amo que me celes.",
+          longMessage:
+            "Amo que me celes... me hace sentir amado y que realmente soy alguien importante para ti.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "9",
+          message: "Te preocupas por mi felicidad.",
+          longMessage:
+            "Te preocupas por mi felicidad... siempre buscas hacerme sentir feliz, y a tu lado no importa nada, siempre lo soy.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "10",
+          message: "Eres mi persona favorita.",
+          longMessage:
+            "Eres mi persona favorita... eres mi mejor amiga, mi novia, mi futura esposa, mi persona de confianza y mucho más.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "J",
+          message: "Contigo no tengo dudas.",
+          longMessage:
+            "Contigo no tengo dudas... sé que mi futuro es y siempre será contigo, no tengo duda de nada cuando estoy a tu lado.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "Q",
+          message: "No puedo dejar de mirarte.",
+          longMessage:
+            "No puedo dejar de mirarte... cuando tengo la oportunidad, amo verte: mientras estás en el celular, mientras comes, mientras te ríes, mientras juegas basket... simplemente amo mirarte.",
+          isLong: true,
+        },
+        {
+          suit: "spades",
+          value: "K",
+          message: "Conocí el amor a primera vista.",
+          longMessage:
+            "Conocí el amor a primera vista... porque desde la primera vez que te vi iluminaste mi vida.",
+          isLong: true,
+        },
+      ];
+
+      // Símbolos de los palos
+      const suitSymbols = {
+        hearts: "♥",
+        diamonds: "♦",
+        clubs: "♣",
+        spades: "♠",
+      };
+
+      // Función para mezclar un array (algoritmo Fisher-Yates)
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      // Función para generar las cartas
+      function generateCards() {
+        const cardsContainer = document.getElementById("cardsContainer");
+        const modalCards = document.getElementById("modalCards");
+
+        // Limpiar contenedores
+        cardsContainer.innerHTML = "";
+        modalCards.innerHTML = "";
+
+        cardData.forEach((card, index) => {
+          // Crear carta para el grid principal
+          const cardElement = document.createElement("div");
+          cardElement.className = card.isJoker ? "card joker-card" : "card";
+
+          let cardInnerHTML = `
+                    <div class="card-inner">
+                        <div class="card-front">`;
+
+          if (card.isJoker) {
+            // Diseño especial para comodines
+            cardInnerHTML += `
+                        <div class="joker-text ${
+                          card.jokerType === "color"
+                            ? "joker-color"
+                            : "joker-bw"
+                        }">${card.value}</div>
+                        <div class="${
+                          card.jokerType === "color"
+                            ? "joker-color"
+                            : "joker-bw"
+                        }" style="font-size: 3rem;">★</div>`;
+          } else {
+            // Diseño normal para cartas regulares
+            cardInnerHTML += `
+                        <span class="card-suit top-left ${card.suit}">${
+              suitSymbols[card.suit]
+            }</span>
+                        <div class="card-value ${card.suit}">${card.value}</div>
+                        <span class="card-suit bottom-right ${card.suit}">${
+              suitSymbols[card.suit]
+            }</span>`;
+          }
+
+          cardInnerHTML += `
+                        </div>
+                        <div class="card-back">
+                            <div class="card-message">${card.message}</div>
+                            <button class="read-more-btn" data-index="${index}">Leer más</button>
+                            <span class="card-heart">♥</span>
+                        </div>
+                    </div>
+                `;
+
+          cardElement.innerHTML = cardInnerHTML;
+          cardsContainer.appendChild(cardElement);
+
+          // Crear tarjeta para el modal
+          const modalCard = document.createElement("div");
+          modalCard.className = "modal-card";
+          let modalCardHTML = `
+                    <div class="modal-card-header">`;
+
+          if (card.isJoker) {
+            modalCardHTML += `
+                        <span class="modal-card-title">${card.value}</span>
+                        <span class="${
+                          card.jokerType === "color"
+                            ? "joker-color"
+                            : "joker-bw"
+                        }">★</span>`;
+          } else {
+            modalCardHTML += `
+                        <span class="modal-card-title">${card.value} ${
+              suitSymbols[card.suit]
+            }</span>
+                        <span class="${card.suit}">${
+              suitSymbols[card.suit]
+            }</span>`;
+          }
+
+          modalCardHTML += `
+                    </div>
+                    <div class="modal-card-body">
+                        <p>${card.message}</p>
+                        <button class="read-more-btn" data-index="${index}">Leer más</button>
+                    </div>`;
+
+          modalCard.innerHTML = modalCardHTML;
+          modalCards.appendChild(modalCard);
+
+          // Añadir evento de clic para voltear la carta
+          cardElement.addEventListener("click", function (e) {
+            // No voltear si se hizo clic en el botón "Leer más"
+            if (e.target.className !== "read-more-btn") {
+              this.classList.toggle("flipped");
+            }
+          });
+        });
+
+        // Añadir eventos a los botones "Leer más"
+        document.querySelectorAll(".read-more-btn").forEach((button) => {
+          button.addEventListener("click", function (e) {
+            e.stopPropagation(); // Evitar que la carta se voltee
+            const index = this.getAttribute("data-index");
+            showLongMessage(cardData[index]);
+          });
+        });
+      }
+
+      // Función para mostrar el mensaje largo
+      function showLongMessage(card) {
+        const modal = document.getElementById("longMessageModal");
+        const title = document.getElementById("longMessageTitle");
+        const suit = document.getElementById("longMessageSuit");
+        const body = document.getElementById("longMessageBody");
+
+        if (card.isJoker) {
+          title.textContent = `${card.value}`;
+          suit.className =
+            card.jokerType === "color" ? "joker-color" : "joker-bw";
+          suit.textContent = "★";
+        } else {
+          title.textContent = `${card.value} de ${getSpanishSuitName(
+            card.suit
+          )}`;
+          suit.className = card.suit;
+          suit.textContent = suitSymbols[card.suit];
+        }
+
+        body.innerHTML = card.longMessage.replace(/\n/g, "<br>");
+
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+
+      // Función para obtener el nombre del palo en español
+      function getSpanishSuitName(suit) {
+        const suitNames = {
+          hearts: "corazones",
+          diamonds: "diamantes",
+          clubs: "tréboles",
+          spades: "picas",
+          joker: "comodín",
+        };
+        return suitNames[suit];
+      }
+
+      // Función para mezclar las cartas
+      function shuffleCards() {
+        // Añadir clase de animación al contenedor
+        const cardsContainer = document.getElementById("cardsContainer");
+        cardsContainer.classList.add("shuffling");
+
+        // Mezclar el array de datos
+        shuffleArray(cardData);
+
+        // Esperar a que termine la animación y regenerar las cartas
+        setTimeout(() => {
+          cardsContainer.classList.remove("shuffling");
+          generateCards();
+        }, 500);
+      }
+
+      // Función para manejar el modal
+      function setupModal() {
+        const viewAllBtn = document.getElementById("viewAllBtn");
+        const modal = document.getElementById("cardsModal");
+        const closeModal = document.getElementById("closeModal");
+        const longMessageModal = document.getElementById("longMessageModal");
+        const closeLongMessage = document.getElementById("closeLongMessage");
+
+        viewAllBtn.addEventListener("click", function () {
+          modal.style.display = "block";
+          document.body.style.overflow = "hidden";
+        });
+
+        closeModal.addEventListener("click", function () {
+          modal.style.display = "none";
+          document.body.style.overflow = "auto";
+        });
+
+        closeLongMessage.addEventListener("click", function () {
+          longMessageModal.style.display = "none";
+          document.body.style.overflow = "auto";
+        });
+
+        window.addEventListener("click", function (event) {
+          if (event.target === modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+          }
+          if (event.target === longMessageModal) {
+            longMessageModal.style.display = "none";
+            document.body.style.overflow = "auto";
+          }
+        });
+      }
+
+      // Función para manejar el menú hamburguesa (simulado)
+      function setupMenuButton() {
+        const menuBtn = document.querySelector(".menu-btn");
+        menuBtn.addEventListener("click", function () {
+          alert("Menú en construcción. ¡Pronto tendrás más opciones!");
+        });
+      }
+
+      // Inicializar la página
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mezclar las cartas antes de generarlas por primera vez
+        shuffleArray(cardData);
+
+        // Generar las cartas
+        generateCards();
+
+        // Configurar el botón de mezclar
+        document
+          .getElementById("shuffleBtn")
+          .addEventListener("click", shuffleCards);
+
+        // Configurar modales
+        setupModal();
+
+        // Configurar menú
+        setupMenuButton();
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileToggle = document.getElementById("mobile-toggle");
+        const closeMenu = document.getElementById("close-menu");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const navbar = document.getElementById("navbar");
+
+        mobileToggle.addEventListener("click", function () {
+          mobileMenu.classList.add("open");
+        });
+
+        closeMenu.addEventListener("click", function () {
+          mobileMenu.classList.remove("open");
+        });
+
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 10) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        const currentPage = window.location.pathname.split("/").pop();
+        const navLinks = document.querySelectorAll(".nav-link");
+        const mobileLinks = document.querySelectorAll(".mobile-link");
+
+        function setActiveLinks(links) {
+          links.forEach((link) => {
+            const href = link.getAttribute("href");
+            if (
+              href === currentPage ||
+              (currentPage === "" && href === "index.html")
+            ) {
+              link.classList.add("active");
+            } else {
+              link.classList.remove("active");
+            }
+          });
+        }
+
+        setActiveLinks(navLinks);
+        setActiveLinks(mobileLinks);
+      });
+    </script>
+    <script src="/assets/nav.js" defer></script>
+</body>
+</html>

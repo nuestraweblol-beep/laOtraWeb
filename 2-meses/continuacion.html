@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Más Recuerdos</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #000;
+        color: white;
+        font-family: "Arial", sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 3s infinite;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .container {
+        position: relative;
+        z-index: 10;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      .text-center {
+        text-align: center;
+        padding: 60px 20px;
+        margin-bottom: 40px;
+      }
+
+      .text-center h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: bold;
+        color: #f472b6;
+        margin-bottom: 30px;
+        text-shadow: 0 0 20px rgba(244, 114, 182, 0.3);
+      }
+
+      .text-center p {
+        font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+        color: #fce7f3;
+        line-height: 1.6;
+        font-style: italic;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        align-items: start;
+      }
+
+      .photo {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        background: rgba(128, 128, 128, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(244, 114, 182, 0.2);
+        transition: all 0.5s ease;
+        cursor: pointer;
+      }
+
+      .photo:hover {
+        transform: translateY(-10px);
+        border-color: rgba(244, 114, 182, 0.5);
+        box-shadow: 0 20px 40px rgba(244, 114, 182, 0.2);
+      }
+
+      .photo.horizontal {
+        aspect-ratio: 4/3;
+      }
+
+      .photo.vertical {
+        aspect-ratio: 3/4;
+      }
+
+      .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s ease;
+      }
+
+      .photo:hover img {
+        transform: scale(1.1);
+      }
+
+      @media (max-width: 768px) {
+        .gallery {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .container {
+          padding: 20px 15px;
+        }
+
+        .text-center {
+          padding: 40px 15px;
+          margin-bottom: 20px;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1025px) {
+        .gallery {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+      <!-- Texto arriba -->
+      <div class="text-center">
+        <h1>Mi princesa preciosa</h1>
+        <p>
+          Espero yo también poder hacer feliz a tu yo pequeña y a tu yo
+          actual... porque siempre serás mi chiquita preciosa.
+        </p>
+      </div>
+
+      <!-- Galería de fotos -->
+      <div class="gallery">
+        <div class="photo horizontal">
+          <img src="img/gracias/danna1.jpg" alt="Foto 1" />
+        </div>
+        <div class="photo vertical">
+          <img src="img/gracias/danna2.jpg" alt="Foto 2" />
+        </div>
+        <div class="photo horizontal">
+          <img src="img/gracias/danna3.jpg" alt="Foto 3" />
+        </div>
+        <div class="photo vertical">
+          <img src="img/gracias/danna4.jpg" alt="Foto 4" />
+        </div>
+        <div class="photo horizontal">
+          <img src="img/gracias/danna5.jpg" alt="Foto 5" />
+        </div>
+        <div class="photo vertical">
+          <img src="img/gracias/danna6.jpg" alt="Foto 6" />
+        </div>
+        <div class="photo horizontal">
+          <img src="img/gracias/danna7.jpg" alt="Foto 7" />
+        </div>
+        <div class="photo vertical">
+          <img src="img/gracias/danna8.jpg" alt="Foto 8" />
+        </div>
+        <div class="photo horizontal">
+          <img src="img/gracias/danna9.jpg" alt="Foto 9" />
+        </div>
+        <div class="photo vertical">
+          <img src="img/gracias/danna10.jpg" alt="Foto 10" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function createStars() {
+        const starsContainer = document.getElementById("stars");
+        const numberOfStars = 150;
+
+        for (let i = 0; i < numberOfStars; i++) {
+          const star = document.createElement("div");
+          star.className = "star";
+          star.style.left = Math.random() * 100 + "%";
+          star.style.top = Math.random() * 100 + "%";
+          star.style.animationDelay = Math.random() * 3 + "s";
+          star.style.animationDuration = 2 + Math.random() * 2 + "s";
+          starsContainer.appendChild(star);
+        }
+      }
+
+      window.addEventListener("load", createStars);
+
+      document.querySelectorAll(".photo").forEach((photo) => {
+        photo.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-10px) scale(1.02)";
+        });
+        photo.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+        });
+      });
+    </script>
+    <script src="/assets/nav.js" defer></script>
+</body>
+</html>

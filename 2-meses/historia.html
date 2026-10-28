@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuestra Historia de Amor - Línea del Tiempo</title>
+    <style>
+      /* Estilos generales */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #0a0a0a;
+        color: #e0e0e0;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Título y subtítulo */
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      .title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(to right, #ff6b9d, #c77dff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .subtitle {
+        font-style: italic;
+        color: #ff6b9d;
+      }
+
+      /* Línea del tiempo */
+      .timeline {
+        position: relative;
+        padding: 2rem 0;
+      }
+
+      /* Línea central */
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 174%;
+        background: linear-gradient(to bottom, #ff6b9d, #ff8fa3, #c77dff);
+        border-radius: 999px;
+        box-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+      }
+
+      /* Corazones pequeños en la línea */
+      .timeline-heart {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        color: #ff6b9d;
+        width: 12px;
+        height: 12px;
+        filter: drop-shadow(0 0 3px rgba(255, 107, 157, 0.7));
+      }
+
+      /* Eventos de la línea del tiempo */
+      .timeline-item {
+        display: flex;
+        margin-bottom: 4rem;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.7s ease-out;
+      }
+
+      .timeline-item.animate-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Contenido del evento */
+      .timeline-content {
+        width: 42%;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 107, 157, 0.3);
+        position: relative;
+        backdrop-filter: blur(5px);
+      }
+
+      /* Colores de fondo para cada evento */
+      .timeline-content.pink {
+        background: linear-gradient(
+          to bottom right,
+          rgba(30, 30, 30, 0.8),
+          rgba(255, 107, 157, 0.15)
+        );
+      }
+      .timeline-content.purple {
+        background: linear-gradient(
+          to bottom right,
+          rgba(30, 30, 30, 0.8),
+          rgba(199, 125, 255, 0.15)
+        );
+      }
+      .timeline-content.rose {
+        background: linear-gradient(
+          to bottom right,
+          rgba(30, 30, 30, 0.8),
+          rgba(255, 143, 163, 0.15)
+        );
+      }
+      .timeline-content.red {
+        background: linear-gradient(
+          to bottom right,
+          rgba(30, 30, 30, 0.8),
+          rgba(255, 99, 99, 0.15)
+        );
+      }
+      .timeline-content.fuchsia {
+        background: linear-gradient(
+          to bottom right,
+          rgba(30, 30, 30, 0.8),
+          rgba(232, 121, 249, 0.15)
+        );
+      }
+      .timeline-content.blue {
+        background: linear-gradient(
+          to bottom right,
+          rgba(30, 30, 30, 0.8),
+          rgba(96, 165, 250, 0.15)
+        );
+      }
+      .timeline-content.teal {
+        background: linear-gradient(
+          to bottom right,
+          rgba(30, 30, 30, 0.8),
+          rgba(94, 234, 212, 0.15)
+        );
+      }
+      .timeline-content.amber {
+        background: linear-gradient(
+          to bottom right,
+          rgba(30, 30, 30, 0.8),
+          rgba(251, 191, 36, 0.15)
+        );
+      }
+      .timeline-content.emerald {
+        background: linear-gradient(
+          to bottom right,
+          rgba(30, 30, 30, 0.8),
+          rgba(52, 211, 153, 0.15)
+        );
+      }
+      .timeline-content.indigo {
+        background: linear-gradient(
+          to bottom right,
+          rgba(30, 30, 30, 0.8),
+          rgba(129, 140, 248, 0.15)
+        );
+      }
+
+      /* Encabezado del evento */
+      .event-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .icon-container {
+        padding: 0.5rem;
+        border-radius: 9999px;
+        margin-right: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .icon-container.pink {
+        background-color: rgba(255, 107, 157, 0.2);
+      }
+      .icon-container.purple {
+        background-color: rgba(199, 125, 255, 0.2);
+      }
+      .icon-container.rose {
+        background-color: rgba(255, 143, 163, 0.2);
+      }
+      .icon-container.red {
+        background-color: rgba(255, 99, 99, 0.2);
+      }
+      .icon-container.fuchsia {
+        background-color: rgba(232, 121, 249, 0.2);
+      }
+      .icon-container.blue {
+        background-color: rgba(96, 165, 250, 0.2);
+      }
+      .icon-container.teal {
+        background-color: rgba(94, 234, 212, 0.2);
+      }
+      .icon-container.amber {
+        background-color: rgba(251, 191, 36, 0.2);
+      }
+      .icon-container.emerald {
+        background-color: rgba(52, 211, 153, 0.2);
+      }
+      .icon-container.indigo {
+        background-color: rgba(129, 140, 248, 0.2);
+      }
+
+      .event-icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .event-icon.pink {
+        color: #ff6b9d;
+      }
+      .event-icon.purple {
+        color: #c77dff;
+      }
+      .event-icon.rose {
+        color: #ff8fa3;
+      }
+      .event-icon.red {
+        color: #ff6363;
+      }
+      .event-icon.fuchsia {
+        color: #e879f9;
+      }
+      .event-icon.blue {
+        color: #60a5fa;
+      }
+      .event-icon.teal {
+        color: #5eead4;
+      }
+      .event-icon.amber {
+        color: #fbbf24;
+      }
+      .event-icon.emerald {
+        color: #34d399;
+      }
+      .event-icon.indigo {
+        color: #818cf8;
+      }
+
+      .event-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #ffffff;
+      }
+
+      .event-date {
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+      .event-date.pink {
+        color: #ff6b9d;
+      }
+      .event-date.purple {
+        color: #c77dff;
+      }
+      .event-date.rose {
+        color: #ff8fa3;
+      }
+      .event-date.red {
+        color: #ff6363;
+      }
+      .event-date.fuchsia {
+        color: #e879f9;
+      }
+      .event-date.blue {
+        color: #60a5fa;
+      }
+      .event-date.teal {
+        color: #5eead4;
+      }
+      .event-date.amber {
+        color: #fbbf24;
+      }
+      .event-date.emerald {
+        color: #34d399;
+      }
+      .event-date.indigo {
+        color: #818cf8;
+      }
+
+      .event-description {
+        color: #d0d0d0;
+        font-style: italic;
+      }
+
+      /* Decoración inferior del evento */
+      .event-footer {
+        margin-top: 1rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(255, 107, 157, 0.2);
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .footer-heart {
+        width: 16px;
+        height: 16px;
+      }
+      .footer-heart.pink {
+        color: #ff6b9d;
+      }
+      .footer-heart.purple {
+        color: #c77dff;
+      }
+      .footer-heart.rose {
+        color: #ff8fa3;
+      }
+      .footer-heart.red {
+        color: #ff6363;
+      }
+      .footer-heart.fuchsia {
+        color: #e879f9;
+      }
+      .footer-heart.blue {
+        color: #60a5fa;
+      }
+      .footer-heart.teal {
+        color: #5eead4;
+      }
+      .footer-heart.amber {
+        color: #fbbf24;
+      }
+      .footer-heart.emerald {
+        color: #34d399;
+      }
+      .footer-heart.indigo {
+        color: #818cf8;
+      }
+
+      /* Punto central (corazón) */
+      .timeline-center {
+        width: 16%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      .center-heart {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 4px solid #1a1a1a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        box-shadow: 0 0 15px rgba(255, 107, 157, 0.5);
+      }
+      .center-heart.pink {
+        background-color: #ff6b9d;
+      }
+      .center-heart.purple {
+        background-color: #c77dff;
+      }
+      .center-heart.rose {
+        background-color: #ff8fa3;
+      }
+      .center-heart.red {
+        background-color: #ff6363;
+      }
+      .center-heart.fuchsia {
+        background-color: #e879f9;
+      }
+      .center-heart.blue {
+        background-color: #60a5fa;
+      }
+      .center-heart.teal {
+        background-color: #5eead4;
+      }
+      .center-heart.amber {
+        background-color: #fbbf24;
+      }
+      .center-heart.emerald {
+        background-color: #34d399;
+      }
+      .center-heart.indigo {
+        background-color: #818cf8;
+      }
+
+      .center-heart-icon {
+        width: 20px;
+        height: 20px;
+        color: white;
+        fill: currentColor;
+      }
+
+      /* Espacio vacío para alternancia */
+      .timeline-empty {
+        width: 42%;
+      }
+
+      /* Decoración final */
+      .timeline-footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      .footer-message {
+        text-align: center;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background: linear-gradient(
+          to right,
+          rgba(255, 107, 157, 0.15),
+          rgba(199, 125, 255, 0.15)
+        );
+        border: 1px solid rgba(255, 107, 157, 0.3);
+        display: inline-block;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .footer-text {
+        color: #ff8fa3;
+        font-weight: 500;
+      }
+
+      .footer-hearts {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      /* Corazones flotantes */
+      .floating-hearts {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .floating-heart {
+        position: absolute;
+        color: #ff6b9d;
+        opacity: 0.5;
+        animation: float 15s infinite linear;
+        filter: drop-shadow(0 0 5px rgba(255, 107, 157, 0.5));
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0.5;
+        }
+        50% {
+          transform: translateY(-20px) rotate(10deg);
+          opacity: 0.3;
+        }
+        100% {
+          transform: translateY(-40px) rotate(0deg);
+          opacity: 0;
+        }
+      }
+
+      /* Brillo en hover */
+      .timeline-content:hover {
+        box-shadow: 0 0 20px rgba(255, 107, 157, 0.4);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .center-heart:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .timeline::before {
+          left: 30px;
+        }
+
+        .timeline-heart {
+          left: 30px;
+        }
+
+        .timeline-item,
+        .timeline-item:nth-child(even) {
+          flex-direction: row;
+        }
+
+        .timeline-center {
+          width: 60px;
+          min-width: 60px;
+          justify-content: flex-start;
+          margin-right: 20px;
+        }
+
+        .timeline-content {
+          width: calc(100% - 80px);
+        }
+
+        .timeline-empty {
+          display: none;
+        }
+      }
+      .navbar {
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(236, 72, 153, 0.2);
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        transition: all 0.3s ease;
+        padding: 0.75rem 0;
+      }
+
+      .navbar.scrolled {
+        box-shadow: 0 4px 20px rgba(236, 72, 153, 0.15);
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      .nav-link {
+        color: white;
+        text-decoration: none;
+        position: relative;
+        transition: color 0.3s ease;
+        font-size: 1rem;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #ec4899;
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #f472b6;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      .nav-link.active {
+        color: #ec4899;
+      }
+
+      .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: #ec4899;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 50;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .mobile-menu.open {
+        opacity: 1;
+        pointer-events: auto;
+        display: flex;
+      }
+
+      .mobile-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+
+      .mobile-link {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .mobile-link:hover,
+      .mobile-link.active {
+        color: #ec4899;
+      }
+
+      .close-menu {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: #ec4899;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-toggle {
+          display: block;
+        }
+
+        .nav-container {
+          justify-content: flex-end;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <div class="nav-container">
+          <div class="nav-links">
+            <a href="menu.html" class="nav-link">Inicio</a>
+            <a href="historia.html" class="nav-link active">Historia</a>
+            <a href="contador.html" class="nav-link">Contador</a>
+            <a href="cartas.html" class="nav-link">Cartas</a>
+            <!--<a href="baraja.html" class="nav-link">52 Razones</a> -->
+          </div>
+          <button class="mobile-toggle" id="mobile-toggle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Menú móvil -->
+    <div class="mobile-menu" id="mobile-menu">
+      <button class="close-menu" id="close-menu">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="mobile-links">
+        <a href="menu.html" class="mobile-link active">Inicio</a>
+        <a href="historia.html" class="mobile-link">Historia</a>
+        <a href="contador.html" class="mobile-link">Contador</a>
+        <a href="cartas.html" class="mobile-link">Cartas</a>
+        <a href="baraja.html" class="mobile-link">52 Razones</a>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Corazones flotantes -->
+      <div class="floating-hearts" id="floatingHearts"></div>
+
+      <!-- Encabezado -->
+      <div class="header">
+        <h1 class="title">Feliz segundo mes, mi princesa</h1>
+        <p class="subtitle">
+          "No tuve un tiempo de escribirte una carta breve entonces te escribí
+          una larga."
+        </p>
+        <p class="event-description">
+          Hola amor de mi alma, esta carta la verás el día que cumplamos dos
+          meses, y a pesar de que inicio esta carta días antes, sé que han sido
+          los dos mejores meses de mi vida.
+        </p>
+        <p class="event-description">
+          Dos meses que te he tenido como mi novia, dos meses en los que hemos
+          salido, dos meses en los que te conocí mucho más y mejor y tú a mí. Y
+          a pesar de todo lo que hemos vivido juntos en este tiempo, sigue
+          pareciendo todo un sueño, y si es así, en verdad nunca quiero
+          despertar.
+        </p>
+        <p class="event-description">
+          Nuevamente, te agradezco por ser la persona que eres, por haberme
+          cambiado para ser una mejor persona, a pesar de que lo hiciste "sin
+          querer" el que llegaras a mi vida en el momento preciso fue el mayor
+          regalo que me diste amor.
+        </p>
+        <p class="event-description">
+          Realmente empecé esto con muchas ideas distintas de qué decirte, y
+          como siempre te digo, realmente se me hace muy difícil expresar todo
+          lo que me haces sentir. Así que voy a contarte uno de los puntos que
+          encontré en mi pizarra jajajaja.
+        </p>
+      </div>
+
+      <!-- Línea del tiempo -->
+      <div class="timeline" id="timeline">
+        <!-- Corazones pequeños en la línea -->
+        <svg
+          class="timeline-heart"
+          style="top: 10%"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+          />
+        </svg>
+        <svg
+          class="timeline-heart"
+          style="top: 25%"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+          />
+        </svg>
+        <svg
+          class="timeline-heart"
+          style="top: 40%"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+          />
+        </svg>
+        <svg
+          class="timeline-heart"
+          style="top: 55%"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+          />
+        </svg>
+        <svg
+          class="timeline-heart"
+          style="top: 70%"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+          />
+        </svg>
+        <svg
+          class="timeline-heart"
+          style="top: 85%"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+          />
+        </svg>
+
+        <!-- Evento 1: Izquierda -->
+        <div class="timeline-item" style="transition-delay: 0ms">
+          <div class="timeline-content pink">
+            <div class="event-header">
+              <div class="icon-container pink">
+                <svg
+                  class="event-icon pink"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+              <h3 class="event-title">Nuestro primer encuentro</h3>
+            </div>
+            <!-- <p class="event-date pink">12 de Febrero, 2022</p> -->
+            <p class="event-description">
+              Como sabes la primera vez que te vi, me encantaste, a la
+              distancia, pude ver una chica hermosa, con tu cara de odiosa
+              característica, pero sí, preciosa. Y, ese día bromeando con las
+              personas que estaba dije le voy a hablar… Realmente, no pensaba
+              hacerlo pensé que no quería conocer a nadie nunca más, que el amor
+              del que siempre escuchaba no existía… y no sabes cómo me alegra
+              haberme equivocado en todo lo que pensaba.
+            </p>
+            <div class="event-footer">
+              <svg
+                class="footer-heart pink"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-center">
+            <div class="center-heart pink">
+              <svg
+                class="center-heart-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+        <!-- Evento 2: Derecha -->
+        <div class="timeline-item" style="transition-delay: 100ms">
+          <div class="timeline-empty"></div>
+          <div class="timeline-center">
+            <div class="center-heart purple">
+              <svg
+                class="center-heart-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-content purple">
+            <div class="event-header">
+              <div class="icon-container purple">
+                <svg
+                  class="event-icon purple"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </div>
+              <h3 class="event-title">
+                El día en que supe que quería verte siempre
+              </h3>
+            </div>
+            <p class="event-description">
+              El siguiente día que te vi, pues fue mi primer intento de
+              acercarme a ti. Lo curioso, ni siquiera lo intenté, ni lo pensé, a
+              pesar de que no te conocía ni te había hablado solo quería
+              acercarme a ti. Normalmente en ese punto hubiera estado tal vez
+              nervioso y hubiera forzado el conocerte, pero fue tan natural el
+              querer acercarme a ti que no sentí nada de eso, y a pesar de que
+              me ignoraste el saludo jajajaja, nunca voy a olvidar que fue la
+              primera vez que te pude ver tan cerca y cuando te vi decidí que no
+              me iba a importar el que ese día no hubiera podido acercarme a ti.
+            </p>
+            <div class="event-footer">
+              <svg
+                class="footer-heart purple"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evento 3: Izquierda -->
+        <div class="timeline-item" style="transition-delay: 200ms">
+          <div class="timeline-content rose">
+            <div class="event-header">
+              <div class="icon-container rose">
+                <svg
+                  class="event-icon rose"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
+                </svg>
+              </div>
+              <h3 class="event-title">El día que me enamoré de tu sonrisa</h3>
+            </div>
+            <!-- <p class="event-date rose">14 de Marzo, 2022</p> -->
+            <p class="event-description">
+              Y no sé si es el destino, suerte o simple coincidencia, pero la
+              siguiente vez por fin tuve la oportunidad de acercarme a ti. Lo
+              gracioso… Ni siquiera lo intenté, yo solo estaba jugando y
+              hablando las mismas estupideces de siempre cuando atrás mío
+              escuché por primera vez una risa tan hermosa que en seguida tuve
+              que regresar a ver una simple risa que me hizo olvidarme por
+              segundos de todo y solo querer verte, la primera vez que te vi
+              sonreír y la vez que me di cuenta, que quería verte con esa
+              sonrisa siempre. Ese día fue la primera vez que me despedí de ti,
+              siendo la primera vez que "hablé" contigo. Y el siguiente
+              entrenamiento nuevamente pude hablar contigo… cuando te estaba
+              pasando los rebotes, te juro que creo que nunca haría eso por otra
+              persona, pero amé verte y cuando te pasaba los rebotes podía
+              seguir viéndote. Y finalmente hablamos cuando fuimos por agua, no
+              te voy a mentir, me asusté cuando me dijiste tu edad jajaja… pero,
+              sabía que lo que sentía por ti desde ese entonces no era normal en
+              mí. Ese día no lo voy a olvidar nunca, porque sabía que me
+              parecías linda, sabía que me atraías o que me gustabas. Pero ese
+              día hablando contigo de manera tan breve empecé a sentir cosas que
+              nunca antes había sentido. Y… desde ese día en verdad nunca más
+              pude quitarte la mirada de encima.
+            </p>
+            <div class="event-footer">
+              <svg
+                class="footer-heart rose"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-center">
+            <div class="center-heart rose">
+              <svg
+                class="center-heart-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+        <!-- Evento 4: Derecha -->
+        <div class="timeline-item" style="transition-delay: 300ms">
+          <div class="timeline-empty"></div>
+          <div class="timeline-center">
+            <div class="center-heart blue">
+              <svg
+                class="center-heart-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-content blue">
+            <div class="event-header">
+              <div class="icon-container blue">
+                <svg
+                  class="event-icon blue"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <h3 class="event-title">Cada día me enamoraba más de ti</h3>
+            </div>
+            <p class="event-description">
+              Después de eso, tuve varios días hablando contigo que fueron
+              increíbles, tanto en persona como en WhatsApp. Cada que te veía me
+              enamoraba más, me gustabas más. El primer momento donde me hiciste
+              emocionar como niño literal… fue cuando me mandaste fotos
+              probándote los vestidos que te iban a comprar, sé que tal vez no
+              sea mucho, pero te juro que no pude contener mi emoción. Por esos
+              días también recuerdo que de broma salió el tema de quedarme en la
+              U, de que me des tu carnet para seguir pudiendo ir a la U. Que no
+              sé si lo decías de broma o solo me seguías la corriente o en
+              verdad querías verme en ese tiempo luego que me gradué pero yo me
+              emocioné pensando que en verdad te agradaba y te gustaba compartir
+              conmigo lo que me hizo muy feliz.
+            </p>
+            <div class="event-footer">
+              <svg
+                class="footer-heart blue"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evento 5: Izquierda -->
+        <div class="timeline-item" style="transition-delay: 400ms">
+          <div class="timeline-content teal">
+            <div class="event-header">
+              <div class="icon-container teal">
+                <svg
+                  class="event-icon teal"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                  ></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </div>
+              <h3 class="event-title">El mensaje que me hizo sentirte cerca</h3>
+            </div>
+            <p class="event-date teal">31 de Diciembre, 2024</p>
+            <p class="event-description">
+              El siguiente momento que lo voy a recordar por siempre aunque
+              nunca te lo he mencionado es el audio que me mandaste en año
+              nuevo… Sé que tal vez es algo muy común que mandar a tus
+              familiares y amigos, pero tu mensaje de voz me hizo tan pero tan
+              feliz. (Que lindo haberte conocido, burlarme de ti y que tú te
+              burles de mí, me caes súper bien, que nos llevemos por muchos años
+              más (las palabras de ese audio)). Palabras que no son "fuertes" o
+              "demuestren mucho", pero especialmente el "que nos llevemos por
+              muchos años más" me hizo sentir que de algún modo te gustaba que
+              sea parte de tu vida. No sé en qué momento exacto me enamoré de
+              ti, sé que fue durante esas vacaciones, cuando te empecé a conocer
+              mejor, y a pesar de que no te podía ver te sentía cerca de mí.
+              Solo sé que uno de los tantos días en los que me emocioné con tus
+              mensajes me sentí completamente tuyo, sentí que hasta cierto punto
+              mis días felices dependían de ti y solo de ti. De que me hables,
+              de que me molestes, de que me digas cosas bonitas.
+            </p>
+            <div class="event-footer">
+              <svg
+                class="footer-heart teal"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-center">
+            <div class="center-heart teal">
+              <svg
+                class="center-heart-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+        <!-- Evento 6: Derecha -->
+        <div class="timeline-item" style="transition-delay: 500ms">
+          <div class="timeline-empty"></div>
+          <div class="timeline-center">
+            <div class="center-heart red">
+              <svg
+                class="center-heart-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-content red">
+            <div class="event-header">
+              <div class="icon-container red">
+                <svg
+                  class="event-icon red"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path>
+                  <path d="M12 15V3m0 0l-4 4m4-4l4 4"></path>
+                </svg>
+              </div>
+              <h3 class="event-title">Miles de emociones</h3>
+            </div>
+            <p class="event-description">
+              Cuando te volví a ver en enero, lo primero que pensé, es no
+              demuestres lo emocionado que estás de verla, porque realmente
+              sentí como si te hubiera conocido de toda la vida, ya te
+              consideraba mi mejor amiga, pero yo quería más que eso. Es cuando
+              comencé a pensar que tal vez debía arriesgarme, pero mis miedos e
+              inseguridades me lo impedían. Y la verdad pasé así algunos días,
+              pensando en que realmente te amo, pero qué tal que tú no sentías
+              lo mismo, o qué tal y después de graduarme ya no te interesaba. No
+              te voy a mentir ese miedo muchas veces me puso a pensar si debía
+              alejarme de ti. Pero cada que te veía, cada que te reías, cada que
+              me molestabas, sentía la necesidad de acercarme a ti… ni siquiera
+              de manera "romántica", cada que te pisaba los zapatos, no era
+              realmente por molestarte, era porque podía tocarte las manos,
+              sentirte de algún modo, empecé a abrazarte y poco a poco sintiendo
+              más por ti.
+            </p>
+            <div class="event-footer">
+              <svg
+                class="footer-heart red"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evento 7: Izquierda -->
+        <div class="timeline-item" style="transition-delay: 600ms">
+          <div class="timeline-content fuchsia">
+            <div class="event-header">
+              <div class="icon-container fuchsia">
+                <svg
+                  class="event-icon fuchsia"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M9 18V5l12-2v13"></path>
+                  <circle cx="6" cy="18" r="3"></circle>
+                  <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+              </div>
+              <h3 class="event-title">Entendí que no quería soltarte jamás</h3>
+            </div>
+            <p class="event-date fuchsia">16 de Enero, 2025</p>
+            <p class="event-description">
+              El 16 de enero, fue la primera vez que estuvimos juntos fuera del
+              básket. Cuando llegaste temprano y fuiste por café… Ese día fue
+              increíble, pero al mismo tiempo no pude decirte nada de lo que
+              hubiera querido en ese momento. Especialmente cuando ya te ibas,
+              hubiera dado todo porque te quedes conmigo ahí todo el tiempo…
+              igual cuando te querías ir, fue la primera vez que te di la mano,
+              ni siquiera lo hice en un inicio con esa intención, solo quería
+              sostenerte para que no te fueras, pero después de 10 minutos me di
+              cuenta que no te había soltado la mano y que no quería hacerlo.
+              Ese día, cuando ya te fuiste, pasé con una sonrisa el resto del
+              tiempo, pasé muy feliz de haberte tenido por un momento fuera del
+              básket, que también amo estar contigo en el básket, pero en verdad
+              amo pasar tiempo solo contigo haciendo cualquier cosa.
+            </p>
+            <div class="event-footer">
+              <svg
+                class="footer-heart fuchsia"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-center">
+            <div class="center-heart fuchsia">
+              <svg
+                class="center-heart-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+        <!-- Evento 8: Derecha -->
+        <div class="timeline-item" style="transition-delay: 700ms">
+          <div class="timeline-empty"></div>
+          <div class="timeline-center">
+            <div class="center-heart amber">
+              <svg
+                class="center-heart-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-content amber">
+            <div class="event-header">
+              <div class="icon-container amber">
+                <svg
+                  class="event-icon amber"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                  ></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </div>
+              <h3 class="event-title">Mi pelicula favorita</h3>
+            </div>
+            <p class="event-description">
+              Otro punto importante, es el día que te conté sobre el libro de la
+              vida como una de mis pelis favoritas. Y espero que no te "enojes"
+              por esto… pero ese día realmente dudé mucho si te interesaba… y
+              realmente fue estúpido, porque justo ese día pasé abrazándote,
+              teniéndote a lado, pero llegó un momento en que solo dudé de todo.
+              Es por eso que ese día no te había escrito… y… mientras pensaba
+              todo me puse a ver esa peli, sé que es una peli de niños, y que
+              tal vez no es la más apropiada para buscarle un significado, pero
+              mientras la veía no salías de mi mente. Y pensé en… literal una
+              película de niños que te muestra cómo un tipo literalmente hace de
+              todo para estar con la persona que ama… ¿y yo me voy a rendir
+              porque simplemente pienso en estupideces?… Y ese mismo momento
+              quería escribirte, pero no se me ocurrió nada para decirte. Y…
+              apareciste tú preguntándome si todo bien, lo que una vez más me
+              demostró que genuinamente te preocupabas por mí, que en verdad te
+              dabas cuenta cuando no me sentía bien. Tal vez lo confundías con
+              enojo "jamás me enojaría contigo". Siempre fueron dudas y miedos
+              absurdos. Además, ese mismo día, empecé a hacer la playlist en la
+              que hoy tengo varias canciones que me recuerdan a ti, aunque la
+              inicié con un nombre distinto, hubiera sido raro que siendo amigos
+              yo hubiera tenido una playlist con tu nombre jajaja.
+            </p>
+            <div class="event-footer">
+              <svg
+                class="footer-heart amber"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evento 9: Izquierda -->
+        <div class="timeline-item" style="transition-delay: 800ms">
+          <div class="timeline-content emerald">
+            <div class="event-header">
+              <div class="icon-container emerald">
+                <svg
+                  class="event-icon emerald"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="event-title">El beso que lo cambió todo para mí</h3>
+            </div>
+            <p class="event-date emerald">22 de Enero, 2025</p>
+            <p class="event-description">
+              Sin embargo, fuiste tú Danna, tú me diste ese primer beso que me
+              quitó todas las dudas, ese primer beso que me hizo querer
+              arriesgarme, ese beso que me hizo sentir que te quería siempre
+              conmigo. No te voy a mentir, a lo largo de conocernos yo siempre
+              tuve un miedo latente de ¿Qué va a pasar cuándo salga de la U?,
+              ¿Es muy joven, de seguro quiere conocer más gente?, ¿De seguro ya
+              se habla con algunas personas?, ¿Tal vez no quiere nada serio?…
+              Entre miles de dudas, pero tú, con tus acciones y palabras, me
+              demostraste que esas dudas no tenían ningún tipo de sentido. Ese
+              día del beso, el 22 de enero, cambió todo para mí. No sé si lo
+              sentiste igual, pero para mí fue como si el mundo se detuviera por
+              un instante. Después de ese día, ya no podía seguir fingiendo que
+              solo quería tu amistad. Cada mensaje, cada mirada, cada abrazo
+              significaba mucho más.
+            </p>
+            <div class="event-footer">
+              <svg
+                class="footer-heart emerald"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-center">
+            <div class="center-heart emerald">
+              <svg
+                class="center-heart-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+        <!-- Evento 10: Derecha -->
+        <div class="timeline-item" style="transition-delay: 900ms">
+          <div class="timeline-empty"></div>
+          <div class="timeline-center">
+            <div class="center-heart indigo">
+              <svg
+                class="center-heart-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="timeline-content indigo">
+            <div class="event-header">
+              <div class="icon-container indigo">
+                <svg
+                  class="event-icon indigo"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                  ></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <h3 class="event-title">El 'sí' que cambió mi vida</h3>
+            </div>
+            <p class="event-date indigo">31 de Enero, 2025</p>
+            <p class="event-description">
+              Y cuando finalmente te pedí que fueras mi novia, el 31 de enero,
+              estaba tan nervioso que sentía que el corazón se me iba a salir.
+              Tenía miedo de que pensaras que era muy pronto o que prefirieras
+              seguir como estábamos. Pero cuando dijiste que sí, juro que fue el
+              momento más feliz de mi vida. Desde ese día, hemos vivido tantas
+              cosas juntos… pero eso quedará para contártelo en otras cartas.
+            </p>
+            <div class="event-footer">
+              <svg
+                class="footer-heart indigo"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Evento 11: Izquierda -->
+      <div class="timeline-item" style="transition-delay: 1000ms">
+        <div class="timeline-content pink">
+          <div class="event-header">
+            <div class="icon-container pink">
+              <svg
+                class="event-icon pink"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <h3 class="event-title">Contigo cualquier plan es perfecto</h3>
+          </div>
+          <p class="event-date pink">14 de Febrero, 2025</p>
+          <p class="event-description">
+            Amor... este fue otro de esos días que quedan marcados en mi
+            corazón. Ese día entendí algo muy simple pero muy importante: no
+            importa el plan, no importa el lugar, mientras estés tú, todo se
+            vuelve especial.
+            <br /><br />
+            Nunca fui bueno para las manualidades, ni para pintar... pero ese
+            Stitch, y ese Majin Boo que me quedó de recuerdo, son más que
+            figuritas: son pedacitos de felicidad, momentos que me hicieron
+            sentir realmente feliz.
+            <br /><br />
+            Verte disfrutar conmigo, ver tu sonrisa, tu emoción, tus ojitos
+            brillando... eso es lo que hizo que todo valiera la pena. Porque
+            contigo descubrí que lo bonito no está en el plan, sino en
+            compartirlo con la persona que amo.
+            <br /><br />
+            Gracias por regalarme esa tarde, por enseñarme a disfrutar incluso
+            lo que nunca antes me había llamado la atención. Por ser tú, por
+            hacerme sentir tan feliz simplemente estando a tu lado.
+          </p>
+          <div class="event-footer">
+            <svg
+              class="footer-heart pink"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="timeline-center">
+          <div class="center-heart pink">
+            <svg
+              class="center-heart-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="timeline-empty"></div>
+      </div>
+      <!-- Evento 12: Derecha -->
+      <div class="timeline-item" style="transition-delay: 1100ms">
+        <div class="timeline-empty"></div>
+        <div class="timeline-center">
+          <div class="center-heart red">
+            <svg
+              class="center-heart-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="timeline-content red">
+          <div class="event-header">
+            <div class="icon-container red">
+              <svg
+                class="event-icon red"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path>
+                <path d="M12 15V3m0 0l-4 4m4-4l4 4"></path>
+              </svg>
+            </div>
+            <h3 class="event-title">El día de mi graduación</h3>
+          </div>
+          <p class="event-date red">17 de Febrero, 2025</p>
+          <p class="event-description">
+            Este fue un día muy importante para mí… y tú estuviste ahí. Amor, no
+            sabes cuánto significó tenerte a mi lado. Sentir que me acompañabas,
+            que me apoyabas, que simplemente estabas conmigo…
+            <br /><br />
+            Ese día me di cuenta de algo muy claro: quiero que estés conmigo en
+            todos los momentos importantes de mi vida. Y así como tú estuviste
+            ese día, yo te prometo que voy a estar para ti. Siempre.
+            <br /><br />
+            Quiero ser esa persona que te abrace fuerte cuando lo necesites, que
+            te acompañe cuando lo necesites y que celebre contigo todo lo bueno.
+            <br /><br />
+            Porque si tú estás conmigo… todo es más bonito.
+          </p>
+          <div class="event-footer">
+            <svg
+              class="footer-heart red"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Evento 13: Izquierda -->
+      <div class="timeline-item" style="transition-delay: 1200ms">
+        <div class="timeline-content purple">
+          <div class="event-header">
+            <div class="icon-container purple">
+              <svg
+                class="event-icon purple"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 20l9-5-9-5-9 5 9 5z"></path>
+                <polyline points="12 12 12 20"></polyline>
+                <polyline points="12 4 12 8"></polyline>
+                <polyline points="20 12 12 8 4 12"></polyline>
+              </svg>
+            </div>
+            <h3 class="event-title">Nuestro primer mes</h3>
+          </div>
+          <p class="event-date purple">1 de Marzo, 2025</p>
+          <p class="event-description">
+            Amor... ese día me sentí todavía más especial.
+            <br /><br />
+            Desde el primer momento que llegaste a mi vida me hiciste sentir que
+            valía la pena, que era alguien que merecía amor, cariño, detalles.
+            Pero ese 1 de marzo... cuando me diste ese cuaderno como regalo por
+            nuestro primer mes... sentí algo distinto. Sentí que en verdad era
+            importante para ti. Y eso… eso me marcó.
+            <br /><br />
+            En ese momento entendí que si yo te importo así, entonces quiero dar
+            lo mejor de mí en todo. Porque tú, amor, me haces querer ser mejor.
+            Gracias por darme tanto con solo un detalle. Gracias por hacerme
+            sentir valioso, amado, especial.
+            <br /><br />
+            Ese día, sin decir nada, me hiciste sentir todo.
+          </p>
+          <div class="event-footer">
+            <svg
+              class="footer-heart purple"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="timeline-center">
+          <div class="center-heart purple">
+            <svg
+              class="center-heart-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="timeline-empty"></div>
+      </div>
+      <!-- Evento 14: Derecha -->
+      <div class="timeline-item" style="transition-delay: 1300ms">
+        <div class="timeline-empty"></div>
+        <div class="timeline-center">
+          <div class="center-heart indigo">
+            <svg
+              class="center-heart-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="timeline-content indigo">
+          <div class="event-header">
+            <div class="icon-container indigo">
+              <svg
+                class="event-icon indigo"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <h3 class="event-title">Nuestro segundo mes</h3>
+          </div>
+          <p class="event-date indigo">31 de Marzo, 2025</p>
+          <p class="event-description">
+            Otro mes a tu lado… Tal vez no fue el plan más elaborado, tal vez
+            fue algo más simple… pero para mí fue igual de perfecto. Porque no
+            importa lo que hagamos, importa que estés tú.
+            <br /><br />
+            Celebrar otro mes contigo me hizo sentir tan feliz, tan completo.
+            Cada que te veo sonreír, siento algo tan especial que es imposible
+            de explicar… solo sé que quiero cuidarte, hacerte feliz, amarte
+            todos los días.
+            <br /><br />
+            Quiero ser siempre yo el que te abrace cuando estés feliz… o triste…
+            o simplemente cuando quieras que te abracen. Y que tú seas siempre
+            quien me ame a mí… porque yo no quiero a nadie más.
+            <br /><br />
+            Quiero celebrar millones de meses contigo. Y no separarme de ti.
+            Nunca.
+          </p>
+          <div class="event-footer">
+            <svg
+              class="footer-heart indigo"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <!-- Evento 15: Izquierda -->
+      <div class="timeline-item" style="transition-delay: 1400ms">
+        <div class="timeline-content rose">
+          <div class="event-header">
+            <div class="icon-container rose">
+              <svg
+                class="event-icon rose"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3 class="event-title">Tus flores y tu sonrisa</h3>
+          </div>
+          <p class="event-date rose">30 de Abril, 2025</p>
+          <p class="event-description">
+            Hoy fuimos a la Cocina Creativa… so al menos así lo nombraste tú
+            jajaja.
+            <br /><br />
+            Pero fue un día que me confirmó lo que ya sabía desde hace mucho:
+            <br /><br />
+            No existe un solo lugar en el mundo donde la pueda pasar mal si
+            estás tú. Lo mejor fue ver tu carita con esas flores… por fin pude
+            regalarte un ramo más bonito. Y ojalá pueda seguir regalándote
+            muchos más, porque amo esa sonrisa tuya, amo verte feliz, amo
+            mimarte…
+            <br /><br />
+            Amo hacerte sentir como lo que eres: MI PRINCESA.
+            <br /><br />
+            Porque eso es lo que quiero siempre, que te sientas amada, cuidada y
+            feliz a mi lado.
+          </p>
+          <div class="event-footer">
+            <svg
+              class="footer-heart rose"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="timeline-center">
+          <div class="center-heart rose">
+            <svg
+              class="center-heart-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="timeline-empty"></div>
+      </div>
+      <!-- Evento 16: Derecha -->
+      <div class="timeline-item" style="transition-delay: 1500ms">
+        <div class="timeline-empty"></div>
+        <div class="timeline-center">
+          <div class="center-heart amber">
+            <svg
+              class="center-heart-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="timeline-content amber">
+          <div class="event-header">
+            <div class="icon-container amber">
+              <svg
+                class="event-icon amber"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M8 17l4 4 4-4m-4-5v9"></path>
+                <path d="M20 12a8 8 0 1 1-16 0 8 8 0 0 1 16 0z"></path>
+              </svg>
+            </div>
+            <h3 class="event-title">Tu cumple y un mes más</h3>
+          </div>
+          <p class="event-date amber">30 y 31 de Mayo, 2025</p>
+          <p class="event-description">
+            El 30 fue tu cumpleaños, y el 31… un nuevo mes contigo.
+            <br /><br />
+            Amor, como te dije en la carta, tal vez para ti fue un cumpleaños
+            más… Pero para mí fue mucho más que eso. Fue otro año más de vida de
+            la persona que amo con todo mi corazón. El día que el destino, Dios
+            o el mundo te trajo, sin saberlo, directo hasta mí.
+            <br /><br />
+            Y por fin pude mimarte con algo distinto. No sabes cuánto disfruté
+            poder darte esos dos detallitos que sabía con todo mi corazón que te
+            harían feliz. Porque tú te mereces eso y más. Y quiero que todos tus
+            cumpleaños desde ahora y para siempre se sientan así: importantes,
+            mágicos e increíbles.
+            <br /><br />
+            Porque si alguien merece sentirse especial… eres tú. Y porque no hay
+            mejor regalo para mí que saber que existes junto a mi.
+          </p>
+          <div class="event-footer">
+            <svg
+              class="footer-heart amber"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <!-- Evento 18: Derecha -->
+      <div class="timeline-item" style="transition-delay: 1700ms">
+        <div class="timeline-empty"></div>
+        <div class="timeline-center">
+          <div class="center-heart blue">
+            <svg
+              class="center-heart-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="timeline-content blue">
+          <div class="event-header">
+            <div class="icon-container blue">
+              <svg
+                class="event-icon blue"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+            <h3 class="event-title">Aprendo a amarte mejor</h3>
+          </div>
+          <p class="event-date blue">30 de Junio, 2025</p>
+          <p class="event-description">
+            Amor… Hoy no fue el día que yo quería regalarte.
+            <br /><br />
+            Y sé que fue por mi culpa, por no haber planeado mejor, por no haber
+            cuidado cada detalle como mereces. Pero si algo me deja claro este
+            día, es cuánto me importa hacerte feliz… Y cuánto me duele no
+            lograrlo como quiero.
+            <br /><br />
+            Porque tú te mereces lo mejor, siempre. Y yo quiero ser la persona
+            que aprenda y que mejore por ti.
+            <br /><br />
+            Te amo más de lo que muchas veces logro expresar… Pero no voy a
+            dejar de intentarlo nunca.
+          </p>
+          <div class="event-footer">
+            <svg
+              class="footer-heart blue"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie de la línea del tiempo -->
+      <div class="timeline-footer">
+        <div class="footer-message">
+          <p class="footer-text">Y nuestra historia continúa...</p>
+          <div class="footer-hearts">
+            <svg
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="footer-heart pink"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+            <svg
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="footer-heart rose"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+            <svg
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="footer-heart red"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+
+      <p class="event-description">
+        Hola mi amor… ya son 6 mesesotes juntos, y no tienes idea de lo feliz
+        que he sido. Lo feliz que soy cada vez que salimos a algún lado, cada
+        vez que no hacemos nada juntos, cada vez que golosineamos.
+      </p>
+
+      <p class="event-description">
+        Amo despertar cada mañana sabiendo que tengo a alguien tan especial como
+        tú, mi chiquita preciosa, amándome, deseándome los buenos días,
+        preocupándote por mí. En verdad agradezco muchísimo ser el afortunado en
+        tenerte en mi vida.
+      </p>
+
+      <p class="event-description">
+        Gracias por todos los momentos: los buenos y los no tan buenos… Porque
+        incluso en esos momentos encuentro la magia de estar junto a ti,
+        sabiendo que ni en los peores días dejaré de amarte ni por un solo
+        segundo.
+      </p>
+
+      <p class="event-description">
+        Este es solo el inicio de muchos meses, años y décadas juntos.
+      </p>
+
+      <br />
+
+      <p class="event-description">
+        Te amo de aquí a la luna a pasitos de tortuga. 🐢
+      </p>
+      <br />
+      <br />
+    </div>
+
+    <script>
+      // Crear corazones flotantes
+      const floatingHeartsContainer = document.getElementById("floatingHearts");
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement("div");
+        heart.className = "floating-heart";
+
+        // Posición aleatoria
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.top = `${Math.random() * 100}%`;
+
+        // Tamaño aleatorio
+        const size = Math.random() * 20 + 10;
+
+        // Animación aleatoria
+        heart.style.animationDuration = `${Math.random() * 10 + 10}s`;
+        heart.style.animationDelay = `${Math.random() * 5}s`;
+        heart.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+
+        // Crear SVG del corazón
+        heart.innerHTML = `<svg width="${size}" height="${size}" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+
+        floatingHeartsContainer.appendChild(heart);
+      }
+
+      // Animación al hacer scroll
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animate-in");
+            } else {
+              // Opcional: quitar la clase cuando ya no es visible
+              // para que la animación se repita si el usuario sube y baja
+              entry.target.classList.remove("animate-in");
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
+      );
+
+      // Observar todos los elementos de la línea del tiempo
+      const timelineItems = document.querySelectorAll(".timeline-item");
+      timelineItems.forEach((item) => {
+        observer.observe(item);
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileToggle = document.getElementById("mobile-toggle");
+        const closeMenu = document.getElementById("close-menu");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const navbar = document.getElementById("navbar");
+
+        mobileToggle.addEventListener("click", function () {
+          mobileMenu.classList.add("open");
+        });
+
+        closeMenu.addEventListener("click", function () {
+          mobileMenu.classList.remove("open");
+        });
+
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 10) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        const currentPage = window.location.pathname.split("/").pop();
+        const navLinks = document.querySelectorAll(".nav-link");
+        const mobileLinks = document.querySelectorAll(".mobile-link");
+
+        function setActiveLinks(links) {
+          links.forEach((link) => {
+            const href = link.getAttribute("href");
+            if (
+              href === currentPage ||
+              (currentPage === "" && href === "index.html")
+            ) {
+              link.classList.add("active");
+            } else {
+              link.classList.remove("active");
+            }
+          });
+        }
+
+        setActiveLinks(navLinks);
+        setActiveLinks(mobileLinks);
+      });
+    </script>
+    <script src="/assets/nav.js" defer></script>
+</body>
+</html>

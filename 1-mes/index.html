@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Te amo Danna</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #stage { display: flex; align-items: center; justify-content: center; height: 100%; }
+    canvas { max-width: 100%; max-height: 100vh; }
+    #gate {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      z-index: 10;
+      cursor: pointer;
+      transition: opacity .6s ease;
+      text-align: center;
+      padding: 1rem;
+    }
+    #gate h1 { color: #ff4d6d; font-size: 1.8rem; }
+    #gate p { opacity: .8; }
+    #gate .pulse {
+      font-size: 3rem;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+    #gate.hidden { opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div id="gate">
+    <div class="pulse">💖</div>
+    <h1>Te amo Danna</h1>
+    <p>Toca para comenzar</p>
+  </div>
+
+  <div id="stage">
+    <canvas id="heart" width="800" height="700"></canvas>
+  </div>
+
+  <audio id="song" src="audio/CloseToYou.mp3" loop></audio>
+
+  <script>
+    const canvas = document.getElementById("heart");
+    const ctx = canvas.getContext("2d");
+    const gate = document.getElementById("gate");
+    const song = document.getElementById("song");
+
+    const ANCHO = 800, ALTO = 700;
+    const centroX = ANCHO / 2, centroY = ALTO / 2 + 50;
+    const ESCALA = 20;
+    const PUNTOS_TOTALES = 628;
+
+    const imgSrcs = ["img/1.jpeg", "img/2.jpeg", "img/6.jpeg", "img/7.jpeg"];
+    const posiciones = [
+      [50, 50],
+      [ANCHO - 130, 50],
+      [50, ALTO - 130],
+      [ANCHO - 130, ALTO - 130],
+    ];
+    const imagenes = imgSrcs.map((src) => {
+      const img = new Image();
+      img.src = src;
+      return img;
+    });
+
+    function heartX(t) { return 15 * Math.pow(Math.sin(t), 3); }
+    function heartY(t) {
+      return 12 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+    }
+
+    let progreso = 0;
+    let running = false;
+
+    function draw() {
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, ANCHO, ALTO);
+
+      const puntos = [];
+      for (let i = 0; i < progreso; i++) {
+        const t = i / 100;
+        const x = heartX(t) * ESCALA + centroX;
+        const y = -heartY(t) * ESCALA + centroY;
+        puntos.push([x, y]);
+      }
+
+      ctx.strokeStyle = "#ff0000";
+      ctx.lineWidth = 1;
+      for (let i = 0; i < puntos.length; i += 3) {
+        const [x, y] = puntos[i];
+        ctx.beginPath();
+        ctx.moveTo(centroX, centroY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
+
+      if (puntos.length > 1) {
+        ctx.strokeStyle = "#ff0000";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(puntos[0][0], puntos[0][1]);
+        for (let i = 1; i < puntos.length; i++) ctx.lineTo(puntos[i][0], puntos[i][1]);
+        ctx.closePath();
+        ctx.stroke();
+      }
+
+      imagenes.forEach((img, i) => {
+        const [x, y] = posiciones[i];
+        if (img.complete) ctx.drawImage(img, x, y, 80, 80);
+      });
+
+      if (progreso >= PUNTOS_TOTALES) {
+        ctx.fillStyle = "#fff";
+        ctx.textAlign = "center";
+        ctx.font = "40px 'Segoe UI', sans-serif";
+        ctx.fillText("Te amo Danna Valeska", centroX, centroY - 20);
+        ctx.font = "22px 'Segoe UI', sans-serif";
+        ctx.fillText("Gracias por los dos mejores meses de mi vida", centroX, centroY + 20);
+      }
+    }
+
+    function tick() {
+      if (progreso < PUNTOS_TOTALES) progreso++;
+      draw();
+      if (running) requestAnimationFrame(loop);
+    }
+
+    let lastTime = 0;
+    function loop(t) {
+      if (t - lastTime >= 1000 / 30) {
+        lastTime = t;
+        tick();
+      } else if (running) {
+        requestAnimationFrame(loop);
+      }
+    }
+
+    gate.addEventListener("click", () => {
+      running = true;
+      song.play().catch(() => {});
+      gate.classList.add("hidden");
+      requestAnimationFrame(loop);
+    });
+
+    draw();
+  </script>
+
+  <script src="/assets/nav.js" defer></script>
+</body>
+</html>
